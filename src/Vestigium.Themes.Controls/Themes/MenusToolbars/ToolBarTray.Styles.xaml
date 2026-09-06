@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI TOOLBARTRAY STYLES
+         =======================================================================
+         Usage: 
+         <ToolBarTray Style="{StaticResource ToolBarTray.Standard}">
+             <ToolBar Style="{StaticResource ToolBar.Standard}">
+                 ...
+             </ToolBar>
+         </ToolBarTray>
+
+         Available Styles:
+         - ToolBarTray.Standard : Horizontal toolbar tray
+         - ToolBarTray.Vertical : Vertical toolbar tray
+         - ToolBarTray.Locked   : Horizontal tray with dragging disabled
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="ToolBarTray.Base" TargetType="ToolBarTray">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="IsLocked" Value="False" />
+    </Style>
+
+    <!-- Standard – horizontal -->
+    <Style x:Key="ToolBarTray.Standard" TargetType="ToolBarTray" BasedOn="{StaticResource ToolBarTray.Base}">
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+
+    <!-- Vertical -->
+    <Style x:Key="ToolBarTray.Vertical" TargetType="ToolBarTray" BasedOn="{StaticResource ToolBarTray.Base}">
+        <Setter Property="Orientation" Value="Vertical" />
+    </Style>
+
+    <!-- Locked – prevents user repositioning of toolbars -->
+    <Style x:Key="ToolBarTray.Locked" TargetType="ToolBarTray" BasedOn="{StaticResource ToolBarTray.Base}">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="IsLocked" Value="True" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI MEDIAELEMENT STYLES
+         =======================================================================
+         Usage: 
+         <MediaElement Style="{StaticResource MediaElement.Standard}"
+                       Source="pack://application:,,,/Assets/Tutorial.mp4" />
+
+         Available Styles:
+         - MediaElement.Standard : Uniform aspect ratio playback
+         - MediaElement.Cover    : UniformToFill for hero / background video
+         - MediaElement.Muted    : Pre-muted + Cover, ideal for ambient loops
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="MediaElement.Base" TargetType="MediaElement">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Volume" Value="0.5" />
+        <Setter Property="Balance" Value="0.0" />
+        <Setter Property="IsMuted" Value="False" />
+        <Setter Property="LoadedBehavior" Value="Play" />
+        <Setter Property="UnloadedBehavior" Value="Stop" />
+    </Style>
+
+    <!-- Standard – preserve aspect ratio -->
+    <Style x:Key="MediaElement.Standard" TargetType="MediaElement" BasedOn="{StaticResource MediaElement.Base}">
+        <Setter Property="Stretch" Value="Uniform" />
+    </Style>
+
+    <!-- Cover – fill area, may crop -->
+    <Style x:Key="MediaElement.Cover" TargetType="MediaElement" BasedOn="{StaticResource MediaElement.Base}">
+        <Setter Property="Stretch" Value="UniformToFill" />
+    </Style>
+
+    <!-- Muted ambient / background -->
+    <Style x:Key="MediaElement.Muted" TargetType="MediaElement" BasedOn="{StaticResource MediaElement.Base}">
+        <Setter Property="Stretch" Value="UniformToFill" />
+        <Setter Property="IsMuted" Value="True" />
+    </Style>
+
+</ResourceDictionary>

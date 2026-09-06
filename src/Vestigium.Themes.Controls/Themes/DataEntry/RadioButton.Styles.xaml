@@ -1,0 +1,292 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI RADIOBUTTON STYLES
+         =======================================================================
+         Usage:
+         <RadioButton Style="{StaticResource RadioButton.Standard}" GroupName="Options" Content="Option 1" />
+
+         Available Styles:
+         - RadioButton.Standard      : Classic circular radio button
+         - RadioButton.HorizontalTab : Level 1 nav – text with thick bottom border when selected
+         - RadioButton.Pill          : Level 2 nav – rounded pill, solid fill when selected
+         - RadioButton.TextLink      : Level 3 nav – text only, turns blue/bold when selected
+         - RadioButton.Card          : Large clickable card that highlights when selected
+         - RadioButton.VerticalNav   : Flat sidebar item with left accent bar
+         ======================================================================= -->
+
+    <!-- Shared Focus Visual -->
+    <Style x:Key="FocusVisual.RadioButton" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-3"
+                               SnapsToDevicePixels="True"
+                               Stroke="{DynamicResource Vestigium.Brushes.Stroke.Focus}"
+                               StrokeThickness="2"
+                               StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- BASE                                                      -->
+    <!-- ========================================================= -->
+    <Style x:Key="RadioButton.Base" TargetType="RadioButton">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual.RadioButton}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 1. STANDARD                                               -->
+    <!-- ========================================================= -->
+    <Style x:Key="RadioButton.Standard" TargetType="RadioButton" BasedOn="{StaticResource RadioButton.Base}">
+        <Setter Property="Margin" Value="0,4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Width="18" Height="18" VerticalAlignment="Center" Margin="0,0,8,0">
+                            <Ellipse x:Name="OuterRing"
+                                     Stroke="{DynamicResource Vestigium.Brushes.Stroke.Default}"
+                                     StrokeThickness="1.5"
+                                     Fill="{DynamicResource Vestigium.Brushes.Text.Inverse}" />
+                            <Ellipse x:Name="InnerDot"
+                                     Width="10" Height="10"
+                                     Fill="{DynamicResource Vestigium.Brushes.Accent.Primary}"
+                                     Visibility="Collapsed"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center" />
+                        </Grid>
+
+                        <ContentPresenter Grid.Column="1"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="OuterRing" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Accent.Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="OuterRing" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="InnerDot" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="OuterRing" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                            <Setter TargetName="OuterRing" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Stroke.Strong}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                        <!-- Disabled + Checked -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="InnerDot" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 2. HORIZONTAL TAB                                         -->
+    <!-- ========================================================= -->
+    <Style x:Key="RadioButton.HorizontalTab" TargetType="RadioButton" BasedOn="{StaticResource RadioButton.Base}">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Secondary}" />
+        <Setter Property="Padding" Value="12,12,12,8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="TabBorder"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            BorderThickness="0,0,0,3">
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Hover}" />
+                            <Setter TargetName="TabBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Subtle}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="TabBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="TabBorder" Property="BorderBrush" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 3. PILL                                                   -->
+    <!-- ========================================================= -->
+    <Style x:Key="RadioButton.Pill" TargetType="RadioButton" BasedOn="{StaticResource RadioButton.Base}">
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Secondary}" />
+        <Setter Property="Padding" Value="16,6" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="PillBorder"
+                            Background="Transparent"
+                            CornerRadius="16">
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PillBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="PillBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Inverse}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PillBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 4. TEXT LINK                                              -->
+    <!-- ========================================================= -->
+    <Style x:Key="RadioButton.TextLink" TargetType="RadioButton" BasedOn="{StaticResource RadioButton.Base}">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Secondary}" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="Transparent">
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 5. CARD                                                   -->
+    <!-- ========================================================= -->
+    <Style x:Key="RadioButton.Card" TargetType="RadioButton" BasedOn="{StaticResource RadioButton.Base}">
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Card}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="CardBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{DynamicResource Vestigium.Brushes.Stroke.Default}"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CardBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Hover}" />
+                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CardBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="CardBorder" Property="BorderThickness" Value="2" />
+                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Softer}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Disabled}" />
+                            <Setter TargetName="CardBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Disabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 6. VERTICAL NAV                                           -->
+    <!-- ========================================================= -->
+    <Style x:Key="RadioButton.VerticalNav" TargetType="RadioButton" BasedOn="{StaticResource RadioButton.Base}">
+        <Setter Property="Padding" Value="16,12" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="NavBorder"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            BorderThickness="4,0,0,0">
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="NavBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="NavBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Subtle}" />
+                            <Setter TargetName="NavBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Pressed}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="NavBorder" Property="Background" Value="Transparent" />
+                            <Setter TargetName="NavBorder" Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

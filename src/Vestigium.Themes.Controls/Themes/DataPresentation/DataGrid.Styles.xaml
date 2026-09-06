@@ -1,0 +1,259 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- =======================================================================
+         COMMON UI DATAGRID STYLES
+         =======================================================================
+         Usage:
+         <DataGrid Style="{StaticResource DataGrid.Standard}" ItemsSource="{Binding MyData}" />
+
+         Available Styles:
+         - DataGrid.Standard : Clean enterprise grid, resizable columns
+         - DataGrid.Compact  : High-density rows for telemetry / dense logs
+         - DataGrid.Card     : Alternating zebra rows, no grid lines
+         ======================================================================= -->
+
+    <Style x:Key="FocusVisual.DataGrid" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-1"
+                               SnapsToDevicePixels="True"
+                               Stroke="{DynamicResource Vestigium.Brushes.Stroke.Focus}"
+                               StrokeThickness="1.5"
+                               StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Resize gripper (shared) -->
+    <Style x:Key="DataGridColumnHeader.Gripper" TargetType="Thumb">
+        <Setter Property="Width" Value="8" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="SizeWE" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 1. COMPONENT STYLES -->
+    <!-- ========================================== -->
+
+    <!-- Column Header (with resize grips) -->
+    <Style x:Key="DataGridColumnHeader.Standard" TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Grid>
+                        <Border x:Name="HeaderBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  RecognizesAccessKey="True" />
+                                <Path x:Name="SortArrow"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Center"
+                                      Margin="0,0,8,0"
+                                      Fill="{DynamicResource Vestigium.Brushes.Text.Secondary}"
+                                      Visibility="Collapsed"
+                                      Data="M 0 0 L 4 4 L 8 0 Z" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Required for column resize -->
+                        <Thumb x:Name="PART_LeftHeaderGripper"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource DataGridColumnHeader.Gripper}" />
+                        <Thumb x:Name="PART_RightHeaderGripper"
+                               HorizontalAlignment="Right"
+                               Style="{StaticResource DataGridColumnHeader.Gripper}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Softer}" />
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="SortArrow" Property="Data" Value="M 0 4 L 4 0 L 8 4 Z" />
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="SortArrow" Property="Data" Value="M 0 0 L 4 4 L 8 0 Z" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Row -->
+    <Style x:Key="DataGridRow.Standard" TargetType="DataGridRow">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Card}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Grid.RowHover}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="MinHeight" Value="30" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Subtle}" />
+                <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.OnSubtle}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Cell -->
+    <Style x:Key="DataGridCell.Standard" TargetType="DataGridCell">
+        <Setter Property="Padding" Value="10,4" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual.DataGrid}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <Border x:Name="CellBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="CellBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Selection.CellFocus}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 2. DATAGRID STYLES -->
+    <!-- ========================================== -->
+
+    <Style x:Key="DataGrid.Base" TargetType="DataGrid">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Default}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="GridLinesVisibility" Value="Horizontal" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="VerticalGridLinesBrush" Value="Transparent" />
+        <Setter Property="RowHeight" Value="32" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="CanUserResizeColumns" Value="True" />
+        <Setter Property="CanUserSortColumns" Value="True" />
+        <Setter Property="CanUserReorderColumns" Value="True" />
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridColumnHeader.Standard}" />
+        <Setter Property="RowStyle" Value="{StaticResource DataGridRow.Standard}" />
+        <Setter Property="CellStyle" Value="{StaticResource DataGridCell.Standard}" />
+        <Setter Property="SelectionUnit" Value="FullRow" />
+    </Style>
+
+    <Style x:Key="DataGrid.Standard" TargetType="DataGrid" BasedOn="{StaticResource DataGrid.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGrid">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                        <ScrollViewer x:Name="DG_ScrollViewer" Focusable="False">
+                            <ScrollViewer.Template>
+                                <ControlTemplate TargetType="ScrollViewer">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Border Grid.ColumnSpan="2"
+                                                Background="{DynamicResource Vestigium.Brushes.Surface.Header}"
+                                                CornerRadius="4,4,0,0"
+                                                BorderBrush="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                                                BorderThickness="0,0,0,1" />
+                                        <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
+                                                                        Grid.Column="0" Grid.Row="0" />
+                                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                                Grid.Column="0" Grid.Row="1"
+                                                                Grid.ColumnSpan="2"
+                                                                CanContentScroll="{TemplateBinding CanContentScroll}" />
+                                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                                   Grid.Column="1" Grid.Row="1"
+                                                   Value="{TemplateBinding VerticalOffset}"
+                                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+                                        <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                                   Grid.Column="0" Grid.Row="2"
+                                                   Orientation="Horizontal"
+                                                   Value="{TemplateBinding HorizontalOffset}"
+                                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </ScrollViewer.Template>
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DataGrid.Compact" TargetType="DataGrid" BasedOn="{StaticResource DataGrid.Standard}">
+        <Setter Property="RowHeight" Value="26" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="ColumnHeaderStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DataGridColumnHeader.Standard}">
+                    <Setter Property="Padding" Value="8,4" />
+                    <Setter Property="FontSize" Value="11" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCell.Standard}">
+                    <Setter Property="Padding" Value="8,2" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DataGrid.Card" TargetType="DataGrid" BasedOn="{StaticResource DataGrid.Standard}">
+        <Setter Property="AlternatingRowBackground" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+        <Setter Property="GridLinesVisibility" Value="None" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+    </Style>
+</ResourceDictionary>

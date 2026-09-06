@@ -1,0 +1,181 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI RICHTEXTBOX STYLES
+         =======================================================================
+         Usage: 
+         <RichTextBox Style="{StaticResource RichTextBox.ConsoleLog}" />
+         
+         Available Styles:
+         - RichTextBox.Standard   : Standard formatted text input
+         - RichTextBox.ConsoleLog : Dark terminal style for live logs
+         - RichTextBox.CodeViewer : Light monospaced display for scripts/diffs
+         - RichTextBox.ReadOnly   : Flat background for reading document content
+         ======================================================================= -->
+
+    <!-- Shared Focus Visual -->
+    <Style x:Key="FocusVisual.RichTextBox" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-2"
+                               SnapsToDevicePixels="True"
+                               Stroke="{DynamicResource Vestigium.Brushes.Stroke.Focus}"
+                               StrokeThickness="2"
+                               StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- BASE                                                      -->
+    <!-- ========================================================= -->
+    <Style x:Key="RichTextBox.Base" TargetType="RichTextBox">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual.RichTextBox}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource Vestigium.Brushes.Selection.Highlight}" />
+        <Setter Property="SelectionOpacity" Value="0.8" />
+        <Setter Property="Block.LineHeight" Value="1.4" />
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 1. STANDARD                                               -->
+    <!-- ========================================================= -->
+    <Style x:Key="RichTextBox.Standard" TargetType="RichTextBox" BasedOn="{StaticResource RichTextBox.Base}">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Card}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Default}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CaretBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RichTextBox">
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="0"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Auto" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Strong}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 2. CONSOLE LOG                                            -->
+    <!-- ========================================================= -->
+    <Style x:Key="RichTextBox.ConsoleLog" TargetType="RichTextBox" BasedOn="{StaticResource RichTextBox.Base}">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Terminal.Background}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Terminal.Foreground}" />
+        <Setter Property="FontFamily" Value="Consolas, Cascadia Code, Courier New" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CaretBrush" Value="{DynamicResource Vestigium.Brushes.Text.Inverse}" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RichTextBox">
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="0"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Auto" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource Vestigium.Brushes.Terminal.BackgroundDisabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Tertiary}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 3. CODE VIEWER                                            -->
+    <!-- ========================================================= -->
+    <Style x:Key="RichTextBox.CodeViewer" TargetType="RichTextBox" BasedOn="{StaticResource RichTextBox.Base}">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Code}" />
+        <Setter Property="FontFamily" Value="Consolas, Cascadia Code, Courier New" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RichTextBox">
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="0"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Auto" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 4. READ-ONLY                                              -->
+    <!-- ========================================================= -->
+    <Style x:Key="RichTextBox.ReadOnly" TargetType="RichTextBox" BasedOn="{StaticResource RichTextBox.Base}">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RichTextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="0"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Auto" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

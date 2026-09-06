@@ -1,0 +1,184 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+
+    <!-- Metadata -->
+    <sys:String x:Key="Vestigium.Theme.Id">Monokai</sys:String>
+    <sys:String x:Key="Vestigium.Theme.DisplayName">Monokai</sys:String>
+    <sys:String x:Key="Vestigium.Theme.Description">Wimer Monokai — pink accent on olive-black editor chrome.</sys:String>
+    <sys:String x:Key="Vestigium.Theme.Base">Dark</sys:String>
+    <sys:Boolean x:Key="Vestigium.Theme.IsDark">true</sys:Boolean>
+    <sys:String x:Key="Vestigium.Theme.Version">1.0</sys:String>
+    <Color x:Key="Vestigium.Theme.Showcase">#FFF92672</Color>
+
+    <!-- Colors -->
+    <Color x:Key="Vestigium.Colors.Surface.Window">#FF272822</Color>
+    <Color x:Key="Vestigium.Colors.Surface.Layer">#FF1E1F1C</Color>
+    <Color x:Key="Vestigium.Colors.Surface.Card">#FF2D2E27</Color>
+    <Color x:Key="Vestigium.Colors.Surface.Sunken">#FF1E1F1C</Color>
+    <Color x:Key="Vestigium.Colors.Surface.Chrome">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Surface.Sidebar">#FF272822</Color>
+    <Color x:Key="Vestigium.Colors.Surface.StatusBar">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Surface.Header">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Surface.Hover">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Surface.Disabled">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Control.Fill">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Control.FillHover">#FF49483E</Color>
+    <Color x:Key="Vestigium.Colors.Control.FillPressed">#FF272822</Color>
+    <Color x:Key="Vestigium.Colors.Control.FillDisabled">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Control.FillInput">#FF272822</Color>
+    <Color x:Key="Vestigium.Colors.Text.Primary">#FFF8F8F2</Color>
+    <Color x:Key="Vestigium.Colors.Text.Secondary">#FFCFCFC2</Color>
+    <Color x:Key="Vestigium.Colors.Text.Tertiary">#FFA6A69C</Color>
+    <Color x:Key="Vestigium.Colors.Text.Disabled">#FF75715E</Color>
+    <Color x:Key="Vestigium.Colors.Text.Inverse">#FFF8F8F2</Color>
+    <Color x:Key="Vestigium.Colors.Text.Heading">#FFF8F8F2</Color>
+    <Color x:Key="Vestigium.Colors.Text.OnSubtle">#FFF8F8F2</Color>
+    <Color x:Key="Vestigium.Colors.Text.Inactive">#FF75715E</Color>
+    <Color x:Key="Vestigium.Colors.Text.Code">#FFF8F8F2</Color>
+    <Color x:Key="Vestigium.Colors.Text.Link">#FF66D9EF</Color>
+    <Color x:Key="Vestigium.Colors.Accent.Primary">#FFF92672</Color>
+    <Color x:Key="Vestigium.Colors.Accent.Hover">#FFFF4B8D</Color>
+    <Color x:Key="Vestigium.Colors.Accent.Pressed">#FFD01A5B</Color>
+    <Color x:Key="Vestigium.Colors.Accent.Subtle">#FF3D1A28</Color>
+    <Color x:Key="Vestigium.Colors.Accent.Softer">#FF33141F</Color>
+    <Color x:Key="Vestigium.Colors.Selection.Fill">#FF49483E</Color>
+    <Color x:Key="Vestigium.Colors.Selection.FillInactive">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Selection.Text">#FFF8F8F2</Color>
+    <Color x:Key="Vestigium.Colors.Selection.Highlight">#FF49483E</Color>
+    <Color x:Key="Vestigium.Colors.Selection.CellFocus">#FF75715E</Color>
+    <Color x:Key="Vestigium.Colors.Stroke.Default">#FF49483E</Color>
+    <Color x:Key="Vestigium.Colors.Stroke.Subtle">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Stroke.Strong">#FF75715E</Color>
+    <Color x:Key="Vestigium.Colors.Stroke.Focus">#80F92672</Color>
+    <Color x:Key="Vestigium.Colors.Stroke.Input">#FF49483E</Color>
+    <Color x:Key="Vestigium.Colors.Stroke.Disabled">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Status.Success">#FFA6E22E</Color>
+    <Color x:Key="Vestigium.Colors.Status.SuccessHover">#FFB6F03E</Color>
+    <Color x:Key="Vestigium.Colors.Status.SuccessPressed">#FF8BC221</Color>
+    <Color x:Key="Vestigium.Colors.Status.SuccessFill">#FF2A3318</Color>
+    <Color x:Key="Vestigium.Colors.Status.Warning">#FFFD971F</Color>
+    <Color x:Key="Vestigium.Colors.Status.WarningHover">#FFFFB347</Color>
+    <Color x:Key="Vestigium.Colors.Status.WarningPressed">#FFE07F10</Color>
+    <Color x:Key="Vestigium.Colors.Status.WarningFill">#FF3D2A12</Color>
+    <Color x:Key="Vestigium.Colors.Status.Error">#FFF92672</Color>
+    <Color x:Key="Vestigium.Colors.Status.ErrorHover">#FFFF4B8D</Color>
+    <Color x:Key="Vestigium.Colors.Status.ErrorPressed">#FFD01A5B</Color>
+    <Color x:Key="Vestigium.Colors.Status.ErrorFill">#FF3D1A28</Color>
+    <Color x:Key="Vestigium.Colors.Status.Info">#FF66D9EF</Color>
+    <Color x:Key="Vestigium.Colors.Status.InfoFill">#FF1A3338</Color>
+    <Color x:Key="Vestigium.Colors.Status.Neutral">#FF75715E</Color>
+    <Color x:Key="Vestigium.Colors.Status.NeutralFill">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Grid.Line">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Grid.AlternateRow">#FF2D2E27</Color>
+    <Color x:Key="Vestigium.Colors.Grid.Header">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Grid.RowHover">#FF3E3D32</Color>
+    <Color x:Key="Vestigium.Colors.Scroll.Thumb">#FF75715E</Color>
+    <Color x:Key="Vestigium.Colors.Scroll.ThumbHover">#FFA6A69C</Color>
+    <Color x:Key="Vestigium.Colors.Scroll.ThumbDrag">#FFCFCFC2</Color>
+    <Color x:Key="Vestigium.Colors.Scroll.Track">#FF272822</Color>
+    <Color x:Key="Vestigium.Colors.Shadow">#FF000000</Color>
+    <Color x:Key="Vestigium.Colors.Terminal.Background">#FF272822</Color>
+    <Color x:Key="Vestigium.Colors.Terminal.Foreground">#FFF8F8F2</Color>
+    <Color x:Key="Vestigium.Colors.Terminal.Border">#FF49483E</Color>
+    <Color x:Key="Vestigium.Colors.Terminal.BackgroundDisabled">#FF1E1F1C</Color>
+    <Color x:Key="Vestigium.Colors.Terminal.Comment">#FF75715E</Color>
+    <Color x:Key="Vestigium.Colors.Terminal.Keyword">#FFF92672</Color>
+    <Color x:Key="Vestigium.Colors.Terminal.String">#FFE6DB74</Color>
+    <Color x:Key="Vestigium.Colors.Terminal.Number">#FFAE81FF</Color>
+    <Color x:Key="Vestigium.Colors.Terminal.Error">#FFF92672</Color>
+    <Color x:Key="Vestigium.Colors.Terminal.Cursor">#FFF8F8F0</Color>
+    <Color x:Key="Vestigium.Colors.Series.1">#FFF92672</Color>
+    <Color x:Key="Vestigium.Colors.Series.2">#FFA6E22E</Color>
+    <Color x:Key="Vestigium.Colors.Series.3">#FFFD971F</Color>
+    <Color x:Key="Vestigium.Colors.Series.4">#FF66D9EF</Color>
+    <Color x:Key="Vestigium.Colors.Series.5">#FFAE81FF</Color>
+    <Color x:Key="Vestigium.Colors.Series.6">#FFE6DB74</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="Vestigium.Brushes.Surface.Window" Color="{StaticResource Vestigium.Colors.Surface.Window}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Surface.Layer" Color="{StaticResource Vestigium.Colors.Surface.Layer}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Surface.Card" Color="{StaticResource Vestigium.Colors.Surface.Card}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Surface.Sunken" Color="{StaticResource Vestigium.Colors.Surface.Sunken}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Surface.Chrome" Color="{StaticResource Vestigium.Colors.Surface.Chrome}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Surface.Sidebar" Color="{StaticResource Vestigium.Colors.Surface.Sidebar}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Surface.StatusBar" Color="{StaticResource Vestigium.Colors.Surface.StatusBar}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Surface.Header" Color="{StaticResource Vestigium.Colors.Surface.Header}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Surface.Hover" Color="{StaticResource Vestigium.Colors.Surface.Hover}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Surface.Disabled" Color="{StaticResource Vestigium.Colors.Surface.Disabled}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Control.Fill" Color="{StaticResource Vestigium.Colors.Control.Fill}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Control.FillHover" Color="{StaticResource Vestigium.Colors.Control.FillHover}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Control.FillPressed" Color="{StaticResource Vestigium.Colors.Control.FillPressed}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Control.FillDisabled" Color="{StaticResource Vestigium.Colors.Control.FillDisabled}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Control.FillInput" Color="{StaticResource Vestigium.Colors.Control.FillInput}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Text.Primary" Color="{StaticResource Vestigium.Colors.Text.Primary}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Text.Secondary" Color="{StaticResource Vestigium.Colors.Text.Secondary}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Text.Tertiary" Color="{StaticResource Vestigium.Colors.Text.Tertiary}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Text.Disabled" Color="{StaticResource Vestigium.Colors.Text.Disabled}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Text.Inverse" Color="{StaticResource Vestigium.Colors.Text.Inverse}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Text.Heading" Color="{StaticResource Vestigium.Colors.Text.Heading}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Text.OnSubtle" Color="{StaticResource Vestigium.Colors.Text.OnSubtle}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Text.Inactive" Color="{StaticResource Vestigium.Colors.Text.Inactive}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Text.Code" Color="{StaticResource Vestigium.Colors.Text.Code}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Text.Link" Color="{StaticResource Vestigium.Colors.Text.Link}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Accent.Primary" Color="{StaticResource Vestigium.Colors.Accent.Primary}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Accent.Hover" Color="{StaticResource Vestigium.Colors.Accent.Hover}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Accent.Pressed" Color="{StaticResource Vestigium.Colors.Accent.Pressed}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Accent.Subtle" Color="{StaticResource Vestigium.Colors.Accent.Subtle}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Accent.Softer" Color="{StaticResource Vestigium.Colors.Accent.Softer}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Selection.Fill" Color="{StaticResource Vestigium.Colors.Selection.Fill}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Selection.FillInactive" Color="{StaticResource Vestigium.Colors.Selection.FillInactive}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Selection.Text" Color="{StaticResource Vestigium.Colors.Selection.Text}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Selection.Highlight" Color="{StaticResource Vestigium.Colors.Selection.Highlight}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Selection.CellFocus" Color="{StaticResource Vestigium.Colors.Selection.CellFocus}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Stroke.Default" Color="{StaticResource Vestigium.Colors.Stroke.Default}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Stroke.Subtle" Color="{StaticResource Vestigium.Colors.Stroke.Subtle}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Stroke.Strong" Color="{StaticResource Vestigium.Colors.Stroke.Strong}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Stroke.Focus" Color="{StaticResource Vestigium.Colors.Stroke.Focus}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Stroke.Input" Color="{StaticResource Vestigium.Colors.Stroke.Input}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Stroke.Disabled" Color="{StaticResource Vestigium.Colors.Stroke.Disabled}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.Success" Color="{StaticResource Vestigium.Colors.Status.Success}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.SuccessHover" Color="{StaticResource Vestigium.Colors.Status.SuccessHover}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.SuccessPressed" Color="{StaticResource Vestigium.Colors.Status.SuccessPressed}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.SuccessFill" Color="{StaticResource Vestigium.Colors.Status.SuccessFill}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.Warning" Color="{StaticResource Vestigium.Colors.Status.Warning}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.WarningHover" Color="{StaticResource Vestigium.Colors.Status.WarningHover}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.WarningPressed" Color="{StaticResource Vestigium.Colors.Status.WarningPressed}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.WarningFill" Color="{StaticResource Vestigium.Colors.Status.WarningFill}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.Error" Color="{StaticResource Vestigium.Colors.Status.Error}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.ErrorHover" Color="{StaticResource Vestigium.Colors.Status.ErrorHover}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.ErrorPressed" Color="{StaticResource Vestigium.Colors.Status.ErrorPressed}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.ErrorFill" Color="{StaticResource Vestigium.Colors.Status.ErrorFill}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.Info" Color="{StaticResource Vestigium.Colors.Status.Info}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.InfoFill" Color="{StaticResource Vestigium.Colors.Status.InfoFill}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.Neutral" Color="{StaticResource Vestigium.Colors.Status.Neutral}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Status.NeutralFill" Color="{StaticResource Vestigium.Colors.Status.NeutralFill}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Grid.Line" Color="{StaticResource Vestigium.Colors.Grid.Line}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Grid.AlternateRow" Color="{StaticResource Vestigium.Colors.Grid.AlternateRow}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Grid.Header" Color="{StaticResource Vestigium.Colors.Grid.Header}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Grid.RowHover" Color="{StaticResource Vestigium.Colors.Grid.RowHover}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Scroll.Thumb" Color="{StaticResource Vestigium.Colors.Scroll.Thumb}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Scroll.ThumbHover" Color="{StaticResource Vestigium.Colors.Scroll.ThumbHover}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Scroll.ThumbDrag" Color="{StaticResource Vestigium.Colors.Scroll.ThumbDrag}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Scroll.Track" Color="{StaticResource Vestigium.Colors.Scroll.Track}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Shadow" Color="{StaticResource Vestigium.Colors.Shadow}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Terminal.Background" Color="{StaticResource Vestigium.Colors.Terminal.Background}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Terminal.Foreground" Color="{StaticResource Vestigium.Colors.Terminal.Foreground}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Terminal.Border" Color="{StaticResource Vestigium.Colors.Terminal.Border}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Terminal.BackgroundDisabled" Color="{StaticResource Vestigium.Colors.Terminal.BackgroundDisabled}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Terminal.Comment" Color="{StaticResource Vestigium.Colors.Terminal.Comment}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Terminal.Keyword" Color="{StaticResource Vestigium.Colors.Terminal.Keyword}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Terminal.String" Color="{StaticResource Vestigium.Colors.Terminal.String}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Terminal.Number" Color="{StaticResource Vestigium.Colors.Terminal.Number}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Terminal.Error" Color="{StaticResource Vestigium.Colors.Terminal.Error}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Terminal.Cursor" Color="{StaticResource Vestigium.Colors.Terminal.Cursor}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Series.1" Color="{StaticResource Vestigium.Colors.Series.1}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Series.2" Color="{StaticResource Vestigium.Colors.Series.2}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Series.3" Color="{StaticResource Vestigium.Colors.Series.3}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Series.4" Color="{StaticResource Vestigium.Colors.Series.4}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Series.5" Color="{StaticResource Vestigium.Colors.Series.5}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Series.6" Color="{StaticResource Vestigium.Colors.Series.6}" options:Freeze="True" />
+    <SolidColorBrush x:Key="Vestigium.Brushes.Overlay.Scrim" Color="#99000000" options:Freeze="True" />
+
+</ResourceDictionary>

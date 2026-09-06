@@ -1,0 +1,18 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Release" />
+    <Platform Name="Any CPU" />
+  </Configurations>
+  <Project Path="src/Vestigium.Themes/Vestigium.Themes.csproj" />
+  <Project Path="src/Vestigium.Themes.Controls/Vestigium.Themes.Controls.csproj" />
+  <Project Path="src/Vestigium.Themes.LightBlue/Vestigium.Themes.LightBlue.csproj" />
+  <Project Path="src/Vestigium.Themes.DarkMode/Vestigium.Themes.DarkMode.csproj" />
+  <Project Path="src/Vestigium.Themes.Terminal/Vestigium.Themes.Terminal.csproj" />
+  <Project Path="src/Vestigium.Themes.SolarizedDark/Vestigium.Themes.SolarizedDark.csproj" />
+  <Project Path="src/Vestigium.Themes.StandardWPF/Vestigium.Themes.StandardWPF.csproj" />
+  <Project Path="src/Vestigium.Themes.Monokai/Vestigium.Themes.Monokai.csproj" />
+  <Project Path="src/Vestigium.Themes.Sublime/Vestigium.Themes.Sublime.csproj" />
+  <Project Path="src/Vestigium.Themes.Dracula/Vestigium.Themes.Dracula.csproj" />
+  <Project Path="src/Vestigium.Themes.Demo/Vestigium.Themes.Demo.csproj" />
+</Solution>

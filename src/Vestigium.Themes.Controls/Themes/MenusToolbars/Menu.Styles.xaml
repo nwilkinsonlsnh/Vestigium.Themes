@@ -1,0 +1,217 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI MENU & MENUITEM STYLES
+         =======================================================================
+         Usage: 
+         <Menu Style="{StaticResource Menu.Standard}">
+             <MenuItem Header="_File" Style="{StaticResource MenuItem.Standard}">
+                 <MenuItem Header="_Open" Command="{Binding OpenCommand}" />
+                 <Separator Style="{StaticResource Separator.Menu}" />
+                 <MenuItem Header="_Exit" Command="{Binding ExitCommand}" />
+             </MenuItem>
+         </Menu>
+
+         Available Styles:
+         - Menu.Standard     : Modern horizontal application menu bar
+         - MenuItem.Standard : Interactive menu item with hover states and submenus
+         - Separator.Menu    : Horizontal divider for dropdown menus
+         ======================================================================= -->
+
+    <!-- Shared Focus Visual -->
+    <Style x:Key="FocusVisual.Menu" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-1"
+                               SnapsToDevicePixels="True"
+                               Stroke="{DynamicResource Vestigium.Brushes.Stroke.Focus}"
+                               StrokeThickness="1.5"
+                               StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 1. MENU BAR                                -->
+    <!-- ========================================== -->
+    <Style x:Key="Menu.Base" TargetType="Menu">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Card}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="4,2" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+    </Style>
+
+    <Style x:Key="Menu.Standard" TargetType="Menu" BasedOn="{StaticResource Menu.Base}">
+        <!-- Inherits base settings -->
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 2. MENUITEM                                -->
+    <!-- ========================================== -->
+    <Style x:Key="MenuItem.Standard" TargetType="MenuItem">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual.Menu}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Border x:Name="TemplateBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            CornerRadius="4"
+                            Margin="2"
+                            Padding="{TemplateBinding Padding}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!-- Fixed icon / check gutter so header text stays aligned -->
+                                <ColumnDefinition Width="28"
+                                                  SharedSizeGroup="MenuItemIconColumnGroup" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto"
+                                                  SharedSizeGroup="MenuPopupColumnGroup" />
+                                <ColumnDefinition Width="16" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Light vertical rule (icon column | text) -->
+                            <Rectangle x:Name="IconColumnRule"
+                                       Grid.Column="0"
+                                       Width="1"
+                                       HorizontalAlignment="Right"
+                                       Margin="0,2,0,2"
+                                       Fill="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                                       SnapsToDevicePixels="True" />
+
+                            <!-- Icon -->
+                            <ContentPresenter x:Name="Icon"
+                                              Grid.Column="0"
+                                              ContentSource="Icon"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="2,0,4,0"
+                                              SnapsToDevicePixels="True" />
+
+                            <!-- Header (always to the right of the gutter) -->
+                            <ContentPresenter x:Name="HeaderHost"
+                                              Grid.Column="1"
+                                              ContentSource="Header"
+                                              RecognizesAccessKey="True"
+                                              VerticalAlignment="Center"
+                                              Margin="4,0,8,0" />
+
+                            <!-- Submenu arrow -->
+                            <Path x:Name="Arrow"
+                                  Grid.Column="2"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Fill="{DynamicResource Vestigium.Brushes.Text.Secondary}"
+                                  Data="M 0 0 L 4 4 L 0 8 Z"
+                                  Margin="4,0,0,0"
+                                  Visibility="Collapsed" />
+
+                            <!-- Submenu popup -->
+                            <Popup x:Name="SubMenuPopup"
+                                   IsOpen="{TemplateBinding IsSubmenuOpen}"
+                                   Placement="Right"
+                                   Focusable="False"
+                                   AllowsTransparency="True"
+                                   PopupAnimation="Fade">
+                                <Border x:Name="SubMenuBorder"
+                                        Background="{DynamicResource Vestigium.Brushes.Surface.Card}"
+                                        BorderBrush="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                                        BorderThickness="1"
+                                        CornerRadius="6"
+                                        Padding="4">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="12"
+                                                          ShadowDepth="2"
+                                                          Opacity="0.18"
+                                                          Color="Black" />
+                                    </Border.Effect>
+                                    <StackPanel IsItemsHost="True"
+                                                KeyboardNavigation.DirectionalNavigation="Cycle"
+                                                Grid.IsSharedSizeScope="True" />
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <!-- Top-level header (menu bar item with submenu) -->
+                        <Trigger Property="Role" Value="TopLevelHeader">
+                            <Setter Property="Padding" Value="10,6" />
+                            <Setter TargetName="TemplateBorder" Property="CornerRadius" Value="4" />
+                            <Setter TargetName="SubMenuPopup" Property="Placement" Value="Bottom" />
+                            <Setter TargetName="Arrow" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="IconColumnRule" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                        <!-- Top-level item (menu bar, no submenu) -->
+                        <Trigger Property="Role" Value="TopLevelItem">
+                            <Setter Property="Padding" Value="10,6" />
+                            <Setter TargetName="TemplateBorder" Property="CornerRadius" Value="4" />
+                            <Setter TargetName="IconColumnRule" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                        <!-- Submenu header (opens another submenu) -->
+                        <Trigger Property="Role" Value="SubmenuHeader">
+                            <Setter TargetName="Arrow" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="SubMenuPopup" Property="Placement" Value="Right" />
+                        </Trigger>
+
+                        <!-- Hover -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="TemplateBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="Arrow" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                        </Trigger>
+
+                        <!-- Open submenu -->
+                        <Trigger Property="IsSubmenuOpen" Value="True">
+                            <Setter TargetName="TemplateBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Softer}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="Arrow" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                        </Trigger>
+
+                        <!-- Disabled -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="Arrow" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="IconColumnRule" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Grid.RowHover}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 3. MENU SEPARATOR                          -->
+    <!-- ========================================== -->
+    <Style x:Key="Separator.Menu" TargetType="Separator">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="Height" Value="1" />
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Separator">
+                    <Border Background="{TemplateBinding Background}"
+                            Height="{TemplateBinding Height}"
+                            Margin="{TemplateBinding Margin}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

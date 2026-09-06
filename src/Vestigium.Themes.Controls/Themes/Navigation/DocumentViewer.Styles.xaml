@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI DOCUMENTVIEWER STYLES
+         =======================================================================
+         Usage: 
+         <DocumentViewer Style="{StaticResource DocumentViewer.Standard}"
+                         Document="{Binding InvoiceDocument}" />
+
+         Available Styles:
+         - DocumentViewer.Standard   : Clean wrapper with neutral border and workspace
+         - DocumentViewer.Borderless : No outer border; transparent workspace
+
+         Note: These styles adjust outer chrome and the page workspace background.
+         The built-in toolbar, find bar, and page controls remain default.
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="DocumentViewer.Base" TargetType="DocumentViewer">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Standard – bordered workspace -->
+    <Style x:Key="DocumentViewer.Standard" TargetType="DocumentViewer" BasedOn="{StaticResource DocumentViewer.Base}">
+        <!-- Inherits base chrome -->
+    </Style>
+
+    <!-- Borderless – seamless host -->
+    <Style x:Key="DocumentViewer.Borderless" TargetType="DocumentViewer" BasedOn="{StaticResource DocumentViewer.Base}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+</ResourceDictionary>

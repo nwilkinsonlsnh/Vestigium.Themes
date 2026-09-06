@@ -1,0 +1,351 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- =======================================================================
+         COMMON UI EXPANDER STYLES
+         =======================================================================
+         Usage:
+         <Expander Style="{StaticResource Expander.Standard}" Header="Advanced Settings">
+             <TextBlock Text="Collapsible content goes here..." Margin="12" />
+         </Expander>
+
+         Available Styles:
+         - Expander.Standard : Rounded container with rotating chevron header
+         - Expander.Card     : Card-style block with clean borders
+         - Expander.Flush    : Borderless header style for panels and sidebars
+         ======================================================================= -->
+
+    <Style x:Key="FocusVisual.Expander" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-2"
+                               SnapsToDevicePixels="True"
+                               Stroke="{DynamicResource Vestigium.Brushes.Stroke.Focus}"
+                               StrokeThickness="2"
+                               StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Base -->
+    <Style x:Key="Expander.Base" TargetType="Expander">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual.Expander}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Default}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Standard -->
+    <Style x:Key="Expander.Standard" TargetType="Expander" BasedOn="{StaticResource Expander.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Expander">
+                    <Border x:Name="ExpanderBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6">
+                        <DockPanel>
+                            <ToggleButton x:Name="HeaderSite"
+                                          DockPanel.Dock="Top"
+                                          MinHeight="40"
+                                          Background="{DynamicResource Vestigium.Brushes.Surface.Header}"
+                                          BorderBrush="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                                          BorderThickness="0,0,0,1"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          FontWeight="{TemplateBinding FontWeight}"
+                                          Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          OverridesDefaultStyle="True">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="HeaderBorder"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                CornerRadius="6,6,0,0"
+                                                Padding="12,0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <ContentPresenter Grid.Column="0"
+                                                                  Content="{TemplateBinding Content}"
+                                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                                  RecognizesAccessKey="True"
+                                                                  HorizontalAlignment="Left"
+                                                                  VerticalAlignment="Center"
+                                                                  TextElement.Foreground="{TemplateBinding Foreground}"
+                                                                  TextElement.FontSize="{TemplateBinding FontSize}"
+                                                                  TextElement.FontWeight="{TemplateBinding FontWeight}" />
+                                                <Path x:Name="ExpanderArrow"
+                                                      Grid.Column="1"
+                                                      Fill="{DynamicResource Vestigium.Brushes.Text.Secondary}"
+                                                      Width="8" Height="8"
+                                                      Margin="8,0,0,0"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Data="M 0 0 L 4 4 L 8 0 Z"
+                                                      RenderTransformOrigin="0.5,0.5">
+                                                    <Path.RenderTransform>
+                                                        <RotateTransform Angle="0" />
+                                                    </Path.RenderTransform>
+                                                </Path>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Softer}" />
+                                                <Setter TargetName="ExpanderArrow" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                                                <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Subtle}" />
+                                                <Setter TargetName="ExpanderArrow" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                                                <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Pressed}" />
+                                                <Setter TargetName="ExpanderArrow" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="180" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+
+                            <ContentPresenter x:Name="ExpandSite"
+                                              DockPanel.Dock="Bottom"
+                                              Visibility="Collapsed"
+                                              Margin="12" />
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="ExpandSite" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ExpanderBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ExpanderBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Disabled}" />
+                            <Setter TargetName="ExpanderBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Disabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Card -->
+    <Style x:Key="Expander.Card" TargetType="Expander" BasedOn="{StaticResource Expander.Standard}">
+        <Setter Property="Margin" Value="0,4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Expander">
+                    <Border x:Name="ExpanderBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                            BorderThickness="1"
+                            CornerRadius="6">
+                        <DockPanel>
+                            <ToggleButton x:Name="HeaderSite"
+                                          DockPanel.Dock="Top"
+                                          MinHeight="44"
+                                          Background="Transparent"
+                                          BorderBrush="Transparent"
+                                          BorderThickness="0"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          FontWeight="{TemplateBinding FontWeight}"
+                                          Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          OverridesDefaultStyle="True">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="HeaderBorder"
+                                                Background="{TemplateBinding Background}"
+                                                CornerRadius="6"
+                                                Padding="14,0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <ContentPresenter Grid.Column="0"
+                                                                  Content="{TemplateBinding Content}"
+                                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                                  RecognizesAccessKey="True"
+                                                                  HorizontalAlignment="Left"
+                                                                  VerticalAlignment="Center"
+                                                                  TextElement.Foreground="{TemplateBinding Foreground}"
+                                                                  TextElement.FontSize="{TemplateBinding FontSize}"
+                                                                  TextElement.FontWeight="{TemplateBinding FontWeight}" />
+                                                <Path x:Name="ExpanderArrow"
+                                                      Grid.Column="1"
+                                                      Fill="{DynamicResource Vestigium.Brushes.Text.Secondary}"
+                                                      Width="8" Height="8"
+                                                      Margin="8,0,0,0"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Data="M 0 0 L 4 4 L 8 0 Z"
+                                                      RenderTransformOrigin="0.5,0.5">
+                                                    <Path.RenderTransform>
+                                                        <RotateTransform Angle="0" />
+                                                    </Path.RenderTransform>
+                                                </Path>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+                                                <Setter TargetName="ExpanderArrow" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                                                <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Subtle}" />
+                                                <Setter TargetName="ExpanderArrow" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                                                <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Pressed}" />
+                                                <Setter TargetName="ExpanderArrow" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="180" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+
+                            <ContentPresenter x:Name="ExpandSite"
+                                              DockPanel.Dock="Bottom"
+                                              Visibility="Collapsed"
+                                              Margin="14,0,14,14" />
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="ExpandSite" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ExpanderBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ExpanderBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Disabled}" />
+                            <Setter TargetName="ExpanderBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Disabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Flush -->
+    <Style x:Key="Expander.Flush" TargetType="Expander" BasedOn="{StaticResource Expander.Base}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Expander">
+                    <DockPanel>
+                        <ToggleButton x:Name="HeaderSite"
+                                      DockPanel.Dock="Top"
+                                      MinHeight="36"
+                                      Background="Transparent"
+                                      BorderBrush="Transparent"
+                                      BorderThickness="0"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      FontSize="{TemplateBinding FontSize}"
+                                      FontWeight="{TemplateBinding FontWeight}"
+                                      Content="{TemplateBinding Header}"
+                                      ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                      ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                      IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                      OverridesDefaultStyle="True">
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border x:Name="HeaderBorder"
+                                            Background="{TemplateBinding Background}"
+                                            CornerRadius="4"
+                                            Padding="8,0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <ContentPresenter Grid.Column="0"
+                                                              Content="{TemplateBinding Content}"
+                                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                              RecognizesAccessKey="True"
+                                                              HorizontalAlignment="Left"
+                                                              VerticalAlignment="Center"
+                                                              TextElement.Foreground="{TemplateBinding Foreground}"
+                                                              TextElement.FontSize="{TemplateBinding FontSize}"
+                                                              TextElement.FontWeight="{TemplateBinding FontWeight}" />
+                                            <Path x:Name="ExpanderArrow"
+                                                  Grid.Column="1"
+                                                  Fill="{DynamicResource Vestigium.Brushes.Text.Secondary}"
+                                                  Width="8" Height="8"
+                                                  Margin="8,0,0,0"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Data="M 0 0 L 4 4 L 8 0 Z"
+                                                  RenderTransformOrigin="0.5,0.5">
+                                                <Path.RenderTransform>
+                                                    <RotateTransform Angle="0" />
+                                                </Path.RenderTransform>
+                                            </Path>
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+                                            <Setter TargetName="ExpanderArrow" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="ExpanderArrow" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Pressed}" />
+                                            <Setter TargetName="ExpanderArrow" Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <RotateTransform Angle="180" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+
+                        <ContentPresenter x:Name="ExpandSite"
+                                          DockPanel.Dock="Bottom"
+                                          Visibility="Collapsed"
+                                          Margin="8,4,0,8" />
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="ExpandSite" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

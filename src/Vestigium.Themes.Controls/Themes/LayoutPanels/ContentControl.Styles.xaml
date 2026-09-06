@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI CONTENTCONTROL STYLES
+         =======================================================================
+         Usage: 
+         <ContentControl Style="{StaticResource ContentControl.Card}" Content="{Binding ActiveView}" />
+
+         Available Styles:
+         - ContentControl.Standard : Transparent baseline view host
+         - ContentControl.Card     : Framed white container (6px radius)
+         - ContentControl.Panel    : Light gray section container
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="ContentControl.Base" TargetType="ContentControl">
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    </Style>
+
+    <!-- Standard – transparent host -->
+    <Style x:Key="ContentControl.Standard" TargetType="ContentControl" BasedOn="{StaticResource ContentControl.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Card – white framed host -->
+    <Style x:Key="ContentControl.Card" TargetType="ContentControl" BasedOn="{StaticResource ContentControl.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Border Background="{DynamicResource Vestigium.Brushes.Surface.Card}"
+                            BorderBrush="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            Padding="16">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Panel – light gray section host -->
+    <Style x:Key="ContentControl.Panel" TargetType="ContentControl" BasedOn="{StaticResource ContentControl.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Border Background="{DynamicResource Vestigium.Brushes.Surface.Header}"
+                            BorderBrush="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="12">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

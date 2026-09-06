@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI WRAPPANEL LAYOUT STYLES
+         =======================================================================
+         Usage: 
+         <WrapPanel Style="{StaticResource WrapPanel.Standard}">
+             <Button Content="Filter 1" />
+             <Button Content="Filter 2" />
+         </WrapPanel>
+
+         Available Styles:
+         - WrapPanel.Standard : Horizontal flowing wrap panel
+         - WrapPanel.CardGrid : Fixed item size for card galleries
+         - WrapPanel.Toolbar  : Compact wrap for toolbars and chips/badges
+         ======================================================================= -->
+
+    <!-- Standard horizontal flow -->
+    <Style x:Key="WrapPanel.Standard" TargetType="WrapPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="ItemWidth" Value="NaN" />
+        <Setter Property="ItemHeight" Value="NaN" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Uniform card grid (fixed item sizing) -->
+    <Style x:Key="WrapPanel.CardGrid" TargetType="WrapPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="ItemWidth" Value="220" />
+        <Setter Property="ItemHeight" Value="140" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Compact toolbar / chip flow -->
+    <Style x:Key="WrapPanel.Toolbar" TargetType="WrapPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="ItemWidth" Value="NaN" />
+        <Setter Property="ItemHeight" Value="NaN" />
+        <Setter Property="Margin" Value="0,0,0,4" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+</ResourceDictionary>

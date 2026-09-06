@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI FRAME STYLES
+         =======================================================================
+         Usage: 
+         <Frame Style="{StaticResource Frame.Standard}" Source="Pages/Dashboard.xaml" />
+
+         Available Styles:
+         - Frame.Standard : Invisible navigation host (legacy chrome hidden)
+         - Frame.Bordered : Inset frame with neutral border and white background
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="Frame.Base" TargetType="Frame">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <!-- Hide the legacy WPF back/forward navigation bar -->
+        <Setter Property="NavigationUIVisibility" Value="Hidden" />
+        <!-- Frame owns its own navigation journal by default -->
+        <Setter Property="JournalOwnership" Value="OwnsJournal" />
+    </Style>
+
+    <!-- Standard – transparent host -->
+    <Style x:Key="Frame.Standard" TargetType="Frame" BasedOn="{StaticResource Frame.Base}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <!-- Bordered – inset content host -->
+    <Style x:Key="Frame.Bordered" TargetType="Frame" BasedOn="{StaticResource Frame.Base}">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+</ResourceDictionary>

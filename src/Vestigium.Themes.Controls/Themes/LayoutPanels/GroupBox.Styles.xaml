@@ -1,0 +1,220 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI GROUPBOX STYLES
+         =======================================================================
+         Usage: 
+         <GroupBox Style="{StaticResource GroupBox.Standard}" Header="Connection Settings">
+             <StackPanel>
+                 ...
+             </StackPanel>
+         </GroupBox>
+
+         Available Styles:
+         - GroupBox.Standard : Clean rounded container with integrated header
+         - GroupBox.Card     : Card-style group box with more padding
+         - GroupBox.Flush    : Borderless flat panel grouping style
+         ======================================================================= -->
+
+    <!-- Shared Focus Visual -->
+    <Style x:Key="FocusVisual.GroupBox" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-2"
+                               SnapsToDevicePixels="True"
+                               Stroke="{DynamicResource Vestigium.Brushes.Stroke.Focus}"
+                               StrokeThickness="2"
+                               StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 1. BASE                                    -->
+    <!-- ========================================== -->
+    <Style x:Key="GroupBox.Base" TargetType="GroupBox">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual.GroupBox}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Padding" Value="12" />
+        <Setter Property="Margin" Value="0,0,0,12" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 2. STANDARD                                -->
+    <!-- ========================================== -->
+    <Style x:Key="GroupBox.Standard" TargetType="GroupBox" BasedOn="{StaticResource GroupBox.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GroupBox">
+                    <Grid SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="6" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="6" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="6" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Outer border -->
+                        <Border x:Name="OuterBorder"
+                                Grid.Column="0" Grid.Row="1"
+                                Grid.ColumnSpan="4" Grid.RowSpan="3"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6" />
+
+                        <!-- Header (covers the border line) -->
+                        <Border x:Name="Header"
+                                Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                                Padding="4,0"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter ContentSource="Header"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+
+                        <!-- Content -->
+                        <ContentPresenter Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
+                                          Margin="{TemplateBinding Padding}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Disabled}" />
+                            <Setter TargetName="OuterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Disabled}" />
+                            <Setter TargetName="Header" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 3. CARD                                    -->
+    <!-- ========================================== -->
+    <Style x:Key="GroupBox.Card" TargetType="GroupBox" BasedOn="{StaticResource GroupBox.Standard}">
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Strong}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GroupBox">
+                    <Grid SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="8" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="8" />
+                        </Grid.RowDefinitions>
+
+                        <Border x:Name="OuterBorder"
+                                Grid.Column="0" Grid.Row="1"
+                                Grid.ColumnSpan="4" Grid.RowSpan="3"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8" />
+
+                        <Border x:Name="Header"
+                                Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                                Padding="6,0"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter ContentSource="Header"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+
+                        <ContentPresenter Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
+                                          Margin="{TemplateBinding Padding}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Disabled}" />
+                            <Setter TargetName="OuterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Disabled}" />
+                            <Setter TargetName="Header" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 4. FLUSH                                   -->
+    <!-- ========================================== -->
+    <Style x:Key="GroupBox.Flush" TargetType="GroupBox" BasedOn="{StaticResource GroupBox.Base}">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GroupBox">
+                    <Grid SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="6" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="12" />
+                        </Grid.RowDefinitions>
+
+                        <Border x:Name="OuterBorder"
+                                Grid.Column="0" Grid.Row="0"
+                                Grid.ColumnSpan="3" Grid.RowSpan="4"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6" />
+
+                        <ContentPresenter Grid.Column="1" Grid.Row="0"
+                                          Margin="0,10,0,0"
+                                          ContentSource="Header"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                        <ContentPresenter Grid.Column="1" Grid.Row="2"
+                                          Margin="0"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="OuterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Grid.RowHover}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

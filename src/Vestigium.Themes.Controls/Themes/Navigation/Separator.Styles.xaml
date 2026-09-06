@@ -1,0 +1,78 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI SEPARATOR STYLES
+         =======================================================================
+         Usage: 
+         <Separator Style="{StaticResource Separator.Standard}" />
+         <Separator Style="{StaticResource Separator.Vertical}" />
+         <Separator Style="{StaticResource Separator.Heavy}" />
+
+         Available Styles:
+         - Separator.Standard : Horizontal 1px flat divider
+         - Separator.Vertical : Vertical 1px flat divider
+         - Separator.Heavy    : Thicker 2px horizontal divider for major sections
+
+         Related (context-specific, defined elsewhere):
+         - Separator.Menu      → Menu.Styles.xaml
+         - Separator.StatusBar → StatusBar.Styles.xaml
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="Separator.Base" TargetType="Separator">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Standard horizontal -->
+    <Style x:Key="Separator.Standard" TargetType="Separator" BasedOn="{StaticResource Separator.Base}">
+        <Setter Property="Height" Value="1" />
+        <Setter Property="Margin" Value="0,4" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Separator">
+                    <Border Background="{TemplateBinding Background}"
+                            Height="{TemplateBinding Height}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Vertical -->
+    <Style x:Key="Separator.Vertical" TargetType="Separator" BasedOn="{StaticResource Separator.Base}">
+        <Setter Property="Width" Value="1" />
+        <Setter Property="Margin" Value="4,0" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Separator">
+                    <Border Background="{TemplateBinding Background}"
+                            Width="{TemplateBinding Width}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Heavy horizontal -->
+    <Style x:Key="Separator.Heavy" TargetType="Separator" BasedOn="{StaticResource Separator.Base}">
+        <Setter Property="Height" Value="2" />
+        <Setter Property="Margin" Value="0,8" />
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Stroke.Strong}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Separator">
+                    <Border Background="{TemplateBinding Background}"
+                            Height="{TemplateBinding Height}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

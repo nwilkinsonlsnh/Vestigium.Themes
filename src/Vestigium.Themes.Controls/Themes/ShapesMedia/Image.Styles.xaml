@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI IMAGE STYLES
+         =======================================================================
+         Usage: 
+         <Image Style="{StaticResource Image.Standard}"
+                Source="pack://application:,,,/Assets/Logo.png" />
+
+         Available Styles:
+         - Image.Standard : Uniform scaling (preserves aspect ratio)
+         - Image.Cover    : UniformToFill for banners and preview tiles
+         - Image.Fill     : Stretch to fill all dimensions
+         - Image.None     : No scaling; displays at native pixel size
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="Image.Base" TargetType="Image">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+    </Style>
+
+    <!-- Standard – preserve aspect ratio, fit inside -->
+    <Style x:Key="Image.Standard" TargetType="Image" BasedOn="{StaticResource Image.Base}">
+        <Setter Property="Stretch" Value="Uniform" />
+        <Setter Property="StretchDirection" Value="Both" />
+    </Style>
+
+    <!-- Cover – fill area, may crop -->
+    <Style x:Key="Image.Cover" TargetType="Image" BasedOn="{StaticResource Image.Base}">
+        <Setter Property="Stretch" Value="UniformToFill" />
+        <Setter Property="StretchDirection" Value="Both" />
+    </Style>
+
+    <!-- Fill – ignore aspect ratio -->
+    <Style x:Key="Image.Fill" TargetType="Image" BasedOn="{StaticResource Image.Base}">
+        <Setter Property="Stretch" Value="Fill" />
+        <Setter Property="StretchDirection" Value="Both" />
+    </Style>
+
+    <!-- None – native pixel size, no scaling -->
+    <Style x:Key="Image.None" TargetType="Image" BasedOn="{StaticResource Image.Base}">
+        <Setter Property="Stretch" Value="None" />
+        <Setter Property="StretchDirection" Value="Both" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,347 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI CHECKBOX STYLES
+         =======================================================================
+         Usage:
+         <CheckBox Style="{StaticResource CheckBox.Standard}" Content="Enable logging" />
+
+         Available Styles:
+         - CheckBox.Standard     : Modern square checkbox with three-state support
+         - CheckBox.Error        : Validation failure state (red border)
+         - CheckBox.ToggleSwitch : Mobile-style on/off switch
+         - CheckBox.Card         : Large clickable card with selection indicator
+         ======================================================================= -->
+
+    <!-- Shared Focus Visual -->
+    <Style x:Key="FocusVisual.CheckBox" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-3"
+                               SnapsToDevicePixels="True"
+                               Stroke="{DynamicResource Vestigium.Brushes.Stroke.Focus}"
+                               StrokeThickness="2"
+                               StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- BASE                                                      -->
+    <!-- ========================================================= -->
+    <Style x:Key="CheckBox.Base" TargetType="CheckBox">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual.CheckBox}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Margin" Value="0,4" />
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 1. STANDARD                                               -->
+    <!-- ========================================================= -->
+    <Style x:Key="CheckBox.Standard" TargetType="CheckBox" BasedOn="{StaticResource CheckBox.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="Box"
+                                Width="18" Height="18"
+                                CornerRadius="3"
+                                Background="{DynamicResource Vestigium.Brushes.Surface.Card}"
+                                BorderBrush="{DynamicResource Vestigium.Brushes.Stroke.Default}"
+                                BorderThickness="1"
+                                VerticalAlignment="Center"
+                                Margin="0,0,8,0">
+                            <Grid>
+                                <Path x:Name="CheckMark"
+                                      Stroke="{DynamicResource Vestigium.Brushes.Text.Inverse}"
+                                      StrokeThickness="2"
+                                      StrokeStartLineCap="Round"
+                                      StrokeEndLineCap="Round"
+                                      StrokeLineJoin="Round"
+                                      Data="M 3.5 9 L 7.5 13 L 14.5 4"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                                <Rectangle x:Name="IndeterminateMark"
+                                           Width="10" Height="2"
+                                           Fill="{DynamicResource Vestigium.Brushes.Text.Inverse}"
+                                           Visibility="Collapsed"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           RadiusX="1" RadiusY="1" />
+                            </Grid>
+                        </Border>
+
+                        <ContentPresenter Grid.Column="1"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <!-- Hover -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Hover}" />
+                        </Trigger>
+
+                        <!-- Checked -->
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <!-- Indeterminate -->
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="IndeterminateMark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <!-- Disabled (unchecked) -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Strong}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+
+                        <!-- Disabled + Checked / Indeterminate -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="CheckMark" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False" />
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="IndeterminateMark" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 2. ERROR                                                  -->
+    <!-- ========================================================= -->
+    <Style x:Key="CheckBox.Error" TargetType="CheckBox" BasedOn="{StaticResource CheckBox.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="Box"
+                                Width="18" Height="18"
+                                CornerRadius="3"
+                                Background="{DynamicResource Vestigium.Brushes.Status.ErrorFill}"
+                                BorderBrush="{DynamicResource Vestigium.Brushes.Status.Error}"
+                                BorderThickness="1.5"
+                                VerticalAlignment="Center"
+                                Margin="0,0,8,0">
+                            <Grid>
+                                <Path x:Name="CheckMark"
+                                      Stroke="{DynamicResource Vestigium.Brushes.Status.Error}"
+                                      StrokeThickness="2"
+                                      StrokeStartLineCap="Round"
+                                      StrokeEndLineCap="Round"
+                                      StrokeLineJoin="Round"
+                                      Data="M 3.5 9 L 7.5 13 L 14.5 4"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                                <Rectangle x:Name="IndeterminateMark"
+                                           Width="10" Height="2"
+                                           Fill="{DynamicResource Vestigium.Brushes.Status.Error}"
+                                           Visibility="Collapsed"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           RadiusX="1" RadiusY="1" />
+                            </Grid>
+                        </Border>
+
+                        <ContentPresenter Grid.Column="1"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Status.ErrorHover}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="IndeterminateMark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Strong}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="CheckMark" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter TargetName="IndeterminateMark" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 3. TOGGLE SWITCH                                          -->
+    <!-- ========================================================= -->
+    <Style x:Key="CheckBox.ToggleSwitch" TargetType="CheckBox" BasedOn="{StaticResource CheckBox.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="Track"
+                                Width="40" Height="22"
+                                CornerRadius="11"
+                                Background="{DynamicResource Vestigium.Brushes.Stroke.Default}"
+                                VerticalAlignment="Center"
+                                Margin="0,0,12,0">
+                            <Ellipse x:Name="Thumb"
+                                     Width="16" Height="16"
+                                     Fill="{DynamicResource Vestigium.Brushes.Text.Inverse}"
+                                     HorizontalAlignment="Left"
+                                     Margin="3,0,0,0">
+                                <Ellipse.Effect>
+                                    <DropShadowEffect Color="Black" Opacity="0.2" BlurRadius="4" ShadowDepth="1" />
+                                </Ellipse.Effect>
+                            </Ellipse>
+                        </Border>
+
+                        <ContentPresenter Grid.Column="1"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Track" Property="Background" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Track" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right" />
+                            <Setter TargetName="Thumb" Property="Margin" Value="0,0,3,0" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Track" Property="Background" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+                            <Setter TargetName="Thumb" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================================= -->
+    <!-- 4. CARD                                                   -->
+    <!-- ========================================================= -->
+    <Style x:Key="CheckBox.Card" TargetType="CheckBox" BasedOn="{StaticResource CheckBox.Base}">
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Card}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Default}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Border x:Name="CardBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            Padding="{TemplateBinding Padding}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Selection indicator -->
+                            <Grid Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,12,0">
+                                <Ellipse x:Name="Ring"
+                                         Stroke="{DynamicResource Vestigium.Brushes.Stroke.Default}"
+                                         StrokeThickness="1.5"
+                                         Fill="Transparent" />
+                                <Ellipse x:Name="Dot"
+                                         Width="10" Height="10"
+                                         Fill="{DynamicResource Vestigium.Brushes.Accent.Primary}"
+                                         Visibility="Collapsed"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center" />
+                            </Grid>
+
+                            <ContentPresenter Grid.Column="1"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CardBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Hover}" />
+                            <Setter TargetName="Ring" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Accent.Hover}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Softer}" />
+                            <Setter TargetName="CardBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="CardBorder" Property="BorderThickness" Value="2" />
+                            <Setter TargetName="Ring" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="Dot" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Disabled}" />
+                            <Setter TargetName="CardBorder" Property="BorderBrush" Value="{DynamicResource Vestigium.Brushes.Stroke.Disabled}" />
+                            <Setter TargetName="Ring" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Stroke.Strong}" />
+                            <Setter TargetName="Dot" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

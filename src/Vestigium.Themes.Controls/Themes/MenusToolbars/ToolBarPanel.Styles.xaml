@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI TOOLBARPANEL STYLES
+         =======================================================================
+         Usage: 
+         Normally you do not set this directly. ToolBar injects a ToolBarPanel
+         as its items host. These styles are available if you need to target it.
+
+         Available Styles:
+         - ToolBarPanel.Standard : Default horizontal items host used by ToolBar
+
+         Note:
+         ToolBarPanel does not support true multi-row wrapping the way WrapPanel
+         does. For wrapping action bars, prefer WrapPanel (see WrapPanel.Toolbar)
+         or a custom items host.
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="ToolBarPanel.Base" TargetType="ToolBarPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Standard horizontal items host -->
+    <Style x:Key="ToolBarPanel.Standard" TargetType="ToolBarPanel" BasedOn="{StaticResource ToolBarPanel.Base}">
+        <!-- Default ToolBar items host -->
+    </Style>
+
+</ResourceDictionary>

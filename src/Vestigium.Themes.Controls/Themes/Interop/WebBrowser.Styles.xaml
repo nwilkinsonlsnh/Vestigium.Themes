@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI WEBBROWSER STYLES
+         =======================================================================
+         Usage: 
+         <WebBrowser Style="{StaticResource WebBrowser.Standard}" Source="https://localhost" />
+
+         Available Styles:
+         - WebBrowser.Standard  : Full-pane stretch layout
+         - WebBrowser.Contained : Adds margin to reduce HWND/airspace edge bleed
+
+         Note: WebBrowser is an interop (HWND) control. Full templating is not
+         supported. Only layout properties (Margin, Alignment, etc.) are effective.
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="WebBrowser.Base" TargetType="WebBrowser">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+
+    <!-- Standard – edge-to-edge -->
+    <Style x:Key="WebBrowser.Standard" TargetType="WebBrowser" BasedOn="{StaticResource WebBrowser.Base}">
+        <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <!-- Contained – small inset to avoid airspace overlap with WPF borders -->
+    <Style x:Key="WebBrowser.Contained" TargetType="WebBrowser" BasedOn="{StaticResource WebBrowser.Base}">
+        <Setter Property="Margin" Value="4" />
+    </Style>
+
+</ResourceDictionary>

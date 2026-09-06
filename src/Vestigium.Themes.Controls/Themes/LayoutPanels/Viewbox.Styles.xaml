@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI VIEWBOX STYLES
+         =======================================================================
+         Usage: 
+         <Viewbox Style="{StaticResource Viewbox.Standard}">
+             <Path Data="..." Fill="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+         </Viewbox>
+
+         Available Styles:
+         - Viewbox.Standard      : Uniform scaling (preserves aspect ratio)
+         - Viewbox.Fill          : Stretches content to fill the area
+         - Viewbox.UniformToFill : Fills the area while preserving aspect ratio
+         ======================================================================= -->
+
+    <!-- Uniform – preserve aspect ratio, fit inside -->
+    <Style x:Key="Viewbox.Standard" TargetType="Viewbox">
+        <Setter Property="Stretch" Value="Uniform" />
+        <Setter Property="StretchDirection" Value="Both" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Fill – stretch to fill, ignore aspect ratio -->
+    <Style x:Key="Viewbox.Fill" TargetType="Viewbox">
+        <Setter Property="Stretch" Value="Fill" />
+        <Setter Property="StretchDirection" Value="Both" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- UniformToFill – preserve aspect ratio, fill area (may crop) -->
+    <Style x:Key="Viewbox.UniformToFill" TargetType="Viewbox">
+        <Setter Property="Stretch" Value="UniformToFill" />
+        <Setter Property="StretchDirection" Value="Both" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+</ResourceDictionary>

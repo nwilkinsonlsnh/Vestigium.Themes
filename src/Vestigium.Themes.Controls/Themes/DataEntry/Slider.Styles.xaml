@@ -1,0 +1,299 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI SLIDER STYLES
+         =======================================================================
+         Usage:
+         <Slider Style="{StaticResource Slider.Standard}" Minimum="0" Maximum="100" />
+
+         Available Styles:
+         - Slider.Standard : Clean thin track with modern drop-shadow thumb
+         - Slider.Filled   : Track behind the thumb fills with theme blue
+         - Slider.Stepped  : Shows tick marks and enables snapping
+         ======================================================================= -->
+
+    <!-- Shared Focus Visual -->
+    <Style x:Key="FocusVisual.Slider" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-2"
+                               SnapsToDevicePixels="True"
+                               Stroke="{DynamicResource Vestigium.Brushes.Stroke.Focus}"
+                               StrokeThickness="2"
+                               StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 1. COMPONENT TEMPLATES                     -->
+    <!-- ========================================== -->
+
+    <!-- Invisible track buttons (click-to-jump) -->
+    <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Rectangle Fill="Transparent" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Filled track button (left side of thumb) -->
+    <Style x:Key="SliderRepeatButton.Filled" TargetType="RepeatButton">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Rectangle x:Name="FillRect"
+                               Fill="{DynamicResource Vestigium.Brushes.Accent.Primary}"
+                               RadiusX="2" RadiusY="2"
+                               Height="4"
+                               VerticalAlignment="Center" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="FillRect" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Text.Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Draggable thumb -->
+    <Style x:Key="SliderThumb" TargetType="Thumb">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Width" Value="18" />
+        <Setter Property="Height" Value="18" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Ellipse x:Name="ThumbRing"
+                             Fill="{DynamicResource Vestigium.Brushes.Text.Inverse}"
+                             Stroke="{DynamicResource Vestigium.Brushes.Stroke.Default}"
+                             StrokeThickness="1.5">
+                        <Ellipse.Effect>
+                            <DropShadowEffect Color="Black" Opacity="0.15" BlurRadius="4" ShadowDepth="1" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ThumbRing" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Accent.Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter TargetName="ThumbRing" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                            <Setter TargetName="ThumbRing" Property="StrokeThickness" Value="2" />
+                            <Setter TargetName="ThumbRing" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="{DynamicResource Vestigium.Brushes.Accent.Primary}" Opacity="0.3" BlurRadius="6" ShadowDepth="0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ThumbRing" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                            <Setter TargetName="ThumbRing" Property="Stroke" Value="{DynamicResource Vestigium.Brushes.Stroke.Strong}" />
+                            <Setter TargetName="ThumbRing" Property="Effect" Value="{x:Null}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 2. SLIDER STYLES                           -->
+    <!-- ========================================== -->
+
+    <!-- Base -->
+    <Style x:Key="Slider.Base" TargetType="Slider">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual.Slider}" />
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Standard -->
+    <Style x:Key="Slider.Standard" TargetType="Slider" BasedOn="{StaticResource Slider.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Rectangle x:Name="TrackBackground"
+                                       Grid.Row="1"
+                                       Height="4"
+                                       Fill="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                                       RadiusX="2" RadiusY="2"
+                                       VerticalAlignment="Center"
+                                       Margin="5,0" />
+
+                            <Track x:Name="PART_Track" Grid.Row="1">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeatButton}"
+                                                  Command="{x:Static Slider.DecreaseLarge}" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeatButton}"
+                                                  Command="{x:Static Slider.IncreaseLarge}" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource SliderThumb}" />
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="TrackBackground" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Filled -->
+    <Style x:Key="Slider.Filled" TargetType="Slider" BasedOn="{StaticResource Slider.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Rectangle x:Name="TrackBackground"
+                                       Grid.Row="1"
+                                       Height="4"
+                                       Fill="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                                       RadiusX="2" RadiusY="2"
+                                       VerticalAlignment="Center"
+                                       Margin="5,0" />
+
+                            <Track x:Name="PART_Track" Grid.Row="1">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeatButton.Filled}"
+                                                  Command="{x:Static Slider.DecreaseLarge}" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeatButton}"
+                                                  Command="{x:Static Slider.IncreaseLarge}" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource SliderThumb}" />
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="TrackBackground" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Stepped -->
+    <Style x:Key="Slider.Stepped" TargetType="Slider" BasedOn="{StaticResource Slider.Standard}">
+        <Setter Property="TickPlacement" Value="BottomRight" />
+        <Setter Property="IsSnapToTickEnabled" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TickBar x:Name="TopTick"
+                                     Grid.Row="0"
+                                     Visibility="Collapsed"
+                                     Fill="{DynamicResource Vestigium.Brushes.Stroke.Default}"
+                                     Placement="Top"
+                                     Height="4"
+                                     Margin="5,0,5,2" />
+
+                            <Rectangle x:Name="TrackBackground"
+                                       Grid.Row="1"
+                                       Height="4"
+                                       Fill="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                                       RadiusX="2" RadiusY="2"
+                                       VerticalAlignment="Center"
+                                       Margin="5,0" />
+
+                            <TickBar x:Name="BottomTick"
+                                     Grid.Row="2"
+                                     Visibility="Visible"
+                                     Fill="{DynamicResource Vestigium.Brushes.Stroke.Default}"
+                                     Placement="Bottom"
+                                     Height="4"
+                                     Margin="5,2,5,0" />
+
+                            <Track x:Name="PART_Track" Grid.Row="1">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeatButton}"
+                                                  Command="{x:Static Slider.DecreaseLarge}" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeatButton}"
+                                                  Command="{x:Static Slider.IncreaseLarge}" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource SliderThumb}" />
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="TickPlacement" Value="TopLeft">
+                            <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="BottomTick" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="TickPlacement" Value="Both">
+                            <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="TrackBackground" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Control.FillDisabled}" />
+                            <Setter TargetName="TopTick" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+                            <Setter TargetName="BottomTick" Property="Fill" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

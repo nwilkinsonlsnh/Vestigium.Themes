@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI GRID & GRIDSPLITTER STYLES
+         =======================================================================
+         Usage: 
+         <Grid>
+             <Grid.ColumnDefinitions>
+                 <ColumnDefinition Width="*" />
+                 <ColumnDefinition Width="Auto" />
+                 <ColumnDefinition Width="2*" />
+             </Grid.ColumnDefinitions>
+
+             <Border Grid.Column="0" ... />
+             <GridSplitter Grid.Column="1" Style="{StaticResource GridSplitter.Standard}"
+                           Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+             <Border Grid.Column="2" ... />
+         </Grid>
+
+         Available Styles:
+         - Grid.Standard          : Transparent baseline Grid
+         - GridSplitter.Standard  : Modern thin divider for resizable panels
+         ======================================================================= -->
+
+    <!-- ========================================== -->
+    <!-- 1. GRID                                    -->
+    <!-- ========================================== -->
+    <Style x:Key="Grid.Standard" TargetType="Grid">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 2. GRIDSPLITTER                            -->
+    <!-- ========================================== -->
+    <Style x:Key="GridSplitter.Standard" TargetType="GridSplitter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridSplitter">
+                    <Border x:Name="SplitterBorder"
+                            Background="{DynamicResource Vestigium.Brushes.Stroke.Subtle}"
+                            CornerRadius="1"
+                            Margin="1" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="SplitterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter TargetName="SplitterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Pressed}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="SplitterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Grid.RowHover}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

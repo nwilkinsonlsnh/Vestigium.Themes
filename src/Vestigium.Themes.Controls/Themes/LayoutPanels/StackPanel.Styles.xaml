@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI STACKPANEL STYLES
+         =======================================================================
+         Usage: 
+         <StackPanel Style="{StaticResource StackPanel.FormGroup}">
+             <TextBlock Text="Field Label" />
+             <TextBox Style="{StaticResource TextBox.Standard}" />
+         </StackPanel>
+
+         Available Styles:
+         - StackPanel.FormGroup : Vertical stack for form fields
+         - StackPanel.Toolbar   : Horizontal stack for action bars
+
+         Note: StackPanel does not support true item spacing. Child margins
+         (or an ItemsControl / UniformGrid) are still required for gaps.
+
+         Separators live in Separator.Styles.xaml:
+         - Separator.Standard / Vertical / Heavy
+         ======================================================================= -->
+
+    <!-- Form group – vertical -->
+    <Style x:Key="StackPanel.FormGroup" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Vertical" />
+        <Setter Property="Margin" Value="0,0,0,12" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Toolbar – horizontal -->
+    <Style x:Key="StackPanel.Toolbar" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+</ResourceDictionary>

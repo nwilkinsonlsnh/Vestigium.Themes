@@ -1,0 +1,99 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI PROGRESSBAR STYLES
+         =======================================================================
+         Usage: 
+         <ProgressBar Style="{StaticResource ProgressBar.Standard}" Value="65" Maximum="100" />
+         <ProgressBar Style="{StaticResource ProgressBar.Thin}" IsIndeterminate="True" />
+
+         Available Styles:
+         - ProgressBar.Standard : Modern flat bar (16px) with theme blue indicator
+         - ProgressBar.Thin     : 4px bar, ideal for window edges / subtle status
+         - ProgressBar.Success  : Green indicator for completed states
+         - ProgressBar.Error    : Red indicator for failed / alert states
+
+         Note: These are simplified templates optimized for determinate progress.
+         Indeterminate animation support is limited compared to the default template.
+         ======================================================================= -->
+
+    <!-- ========================================== -->
+    <!-- 1. BASE                                    -->
+    <!-- ========================================== -->
+    <Style x:Key="ProgressBar.Base" TargetType="ProgressBar">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Border x:Name="TemplateRoot"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4"
+                            ClipToBounds="True">
+                        <Grid x:Name="PART_Track">
+                            <Border x:Name="PART_Indicator"
+                                    Background="{TemplateBinding Foreground}"
+                                    CornerRadius="4"
+                                    HorizontalAlignment="Left" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 2. STANDARD                                -->
+    <!-- ========================================== -->
+    <Style x:Key="ProgressBar.Standard" TargetType="ProgressBar" BasedOn="{StaticResource ProgressBar.Base}">
+        <!-- 16px rounded bar -->
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 3. THIN                                    -->
+    <!-- ========================================== -->
+    <Style x:Key="ProgressBar.Thin" TargetType="ProgressBar" BasedOn="{StaticResource ProgressBar.Base}">
+        <Setter Property="Height" Value="4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Border x:Name="TemplateRoot"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="0"
+                            ClipToBounds="True">
+                        <Grid x:Name="PART_Track">
+                            <Border x:Name="PART_Indicator"
+                                    Background="{TemplateBinding Foreground}"
+                                    CornerRadius="0"
+                                    HorizontalAlignment="Left" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 4. SUCCESS                                 -->
+    <!-- ========================================== -->
+    <Style x:Key="ProgressBar.Success" TargetType="ProgressBar" BasedOn="{StaticResource ProgressBar.Base}">
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Status.Success}" />
+    </Style>
+
+    <!-- ========================================== -->
+    <!-- 5. ERROR                                   -->
+    <!-- ========================================== -->
+    <Style x:Key="ProgressBar.Error" TargetType="ProgressBar" BasedOn="{StaticResource ProgressBar.Base}">
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Status.Error}" />
+    </Style>
+
+</ResourceDictionary>

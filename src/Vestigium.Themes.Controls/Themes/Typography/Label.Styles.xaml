@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI LABEL STYLES
+         =======================================================================
+         Usage: 
+         <Label Style="{StaticResource Label.Standard}"
+                Content="_Username:"
+                Target="{Binding ElementName=UsernameTextBox}" />
+
+         Available Styles:
+         - Label.Standard : Standard form field label (access-key ready)
+         - Label.Small    : Compact 12px muted helper label
+         - Label.Bold     : Prominent bold form label
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="Label.Base" TargetType="Label">
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Primary}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Standard form label -->
+    <Style x:Key="Label.Standard" TargetType="Label" BasedOn="{StaticResource Label.Base}">
+        <!-- Inherits base settings -->
+    </Style>
+
+    <!-- Small / helper -->
+    <Style x:Key="Label.Small" TargetType="Label" BasedOn="{StaticResource Label.Base}">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Secondary}" />
+    </Style>
+
+    <!-- Bold / prominent -->
+    <Style x:Key="Label.Bold" TargetType="Label" BasedOn="{StaticResource Label.Base}">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{DynamicResource Vestigium.Brushes.Text.Heading}" />
+    </Style>
+
+</ResourceDictionary>

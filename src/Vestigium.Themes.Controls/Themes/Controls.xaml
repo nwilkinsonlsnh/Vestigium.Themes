@@ -1,0 +1,52 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Vestigium.Themes;component/Themes/Converters.xaml" />
+
+        <ResourceDictionary Source="DataEntry/Button.Styles.xaml" />
+        <ResourceDictionary Source="DataEntry/Calendar.Styles.xaml" />
+        <ResourceDictionary Source="DataEntry/CheckBox.Styles.xaml" />
+        <ResourceDictionary Source="DataEntry/ComboBox.Styles.xaml" />
+        <ResourceDictionary Source="DataEntry/DatePicker.Styles.xaml" />
+        <ResourceDictionary Source="DataEntry/PasswordBox.Styles.xaml" />
+        <ResourceDictionary Source="DataEntry/RadioButton.Styles.xaml" />
+        <ResourceDictionary Source="DataEntry/RichTextBox.Styles.xaml" />
+        <ResourceDictionary Source="DataEntry/Slider.Styles.xaml" />
+        <ResourceDictionary Source="DataEntry/TextBox.Styles.xaml" />
+        <ResourceDictionary Source="DataPresentation/DataGrid.Styles.xaml" />
+        <ResourceDictionary Source="DataPresentation/Expander.Styles.xaml" />
+        <ResourceDictionary Source="DataPresentation/ListBox.Styles.xaml" />
+        <ResourceDictionary Source="DataPresentation/ListView.Styles.xaml" />
+        <ResourceDictionary Source="DataPresentation/TabControl.Styles.xaml" />
+        <ResourceDictionary Source="DataPresentation/TreeView.Styles.xaml" />
+        <ResourceDictionary Source="Interop/WebBrowser.Styles.xaml" />
+        <ResourceDictionary Source="LayoutPanels/Border.Styles.xaml" />
+        <ResourceDictionary Source="LayoutPanels/Canvas.Styles.xaml" />
+        <ResourceDictionary Source="LayoutPanels/ContentControl.Styles.xaml" />
+        <ResourceDictionary Source="LayoutPanels/DockPanel.Styles.xaml" />
+        <ResourceDictionary Source="LayoutPanels/Grid.Styles.xaml" />
+        <ResourceDictionary Source="LayoutPanels/GridSplitter.Styles.xaml" />
+        <ResourceDictionary Source="LayoutPanels/GroupBox.Styles.xaml" />
+        <ResourceDictionary Source="LayoutPanels/StackPanel.Styles.xaml" />
+        <ResourceDictionary Source="LayoutPanels/Viewbox.Styles.xaml" />
+        <ResourceDictionary Source="LayoutPanels/WrapPanel.Styles.xaml" />
+        <ResourceDictionary Source="MenusToolbars/ContextMenu.Styles.xaml" />
+        <ResourceDictionary Source="MenusToolbars/Menu.Styles.xaml" />
+        <ResourceDictionary Source="MenusToolbars/StatusBar.Styles.xaml" />
+        <ResourceDictionary Source="MenusToolbars/ToolBar.Styles.xaml" />
+        <ResourceDictionary Source="MenusToolbars/ToolBarPanel.Styles.xaml" />
+        <ResourceDictionary Source="MenusToolbars/ToolBarTray.Styles.xaml" />
+        <ResourceDictionary Source="Navigation/ScrollBar.Styles.xaml" />
+        <ResourceDictionary Source="Navigation/ScrollViewer.Styles.xaml" />
+        <ResourceDictionary Source="Navigation/DocumentViewer.Styles.xaml" />
+        <ResourceDictionary Source="Navigation/Frame.Styles.xaml" />
+        <ResourceDictionary Source="Navigation/ProgressBar.Styles.xaml" />
+        <ResourceDictionary Source="Navigation/Separator.Styles.xaml" />
+        <ResourceDictionary Source="ShapesMedia/Ellipse.Styles.xaml" />
+        <ResourceDictionary Source="ShapesMedia/Image.Styles.xaml" />
+        <ResourceDictionary Source="ShapesMedia/MediaElement.Styles.xaml" />
+        <ResourceDictionary Source="ShapesMedia/Rectangle.Styles.xaml" />
+        <ResourceDictionary Source="Typography/Label.Styles.xaml" />
+        <ResourceDictionary Source="Typography/TextBlock.Styles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

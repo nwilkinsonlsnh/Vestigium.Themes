@@ -1,0 +1,16 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <CornerRadius x:Key="Vestigium.Metrics.Radius.Control">4</CornerRadius>
+    <CornerRadius x:Key="Vestigium.Metrics.Radius.Card">6</CornerRadius>
+    <Thickness x:Key="Vestigium.Metrics.Stroke.Thin">1</Thickness>
+    <Thickness x:Key="Vestigium.Metrics.Stroke.Focus">2</Thickness>
+    <sys:Double x:Key="Vestigium.Metrics.Space.XS">4</sys:Double>
+    <sys:Double x:Key="Vestigium.Metrics.Space.SM">8</sys:Double>
+    <sys:Double x:Key="Vestigium.Metrics.Space.MD">12</sys:Double>
+    <sys:Double x:Key="Vestigium.Metrics.Space.LG">16</sys:Double>
+    <sys:Double x:Key="Vestigium.Metrics.Space.XL">24</sys:Double>
+    <sys:Double x:Key="Vestigium.Metrics.Control.MinHeight">32</sys:Double>
+    <FontFamily x:Key="Vestigium.Fonts.Family.UI">Segoe UI Variable, Segoe UI, Tahoma</FontFamily>
+    <FontFamily x:Key="Vestigium.Fonts.Family.Mono">Cascadia Mono, Consolas, Courier New</FontFamily>
+</ResourceDictionary>

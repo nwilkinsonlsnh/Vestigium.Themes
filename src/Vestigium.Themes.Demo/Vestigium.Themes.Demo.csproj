@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationTitle>Vestigium Themes Demo</ApplicationTitle>
+    <RootNamespace>Vestigium.Themes.Demo</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <StartupObject>Vestigium.Themes.Demo.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vestigium.Themes\Vestigium.Themes.csproj" />
+    <ProjectReference Include="..\Vestigium.Themes.Controls\Vestigium.Themes.Controls.csproj" />
+    <ProjectReference Include="..\Vestigium.Themes.LightBlue\Vestigium.Themes.LightBlue.csproj" />
+    <ProjectReference Include="..\Vestigium.Themes.DarkMode\Vestigium.Themes.DarkMode.csproj" />
+    <ProjectReference Include="..\Vestigium.Themes.Terminal\Vestigium.Themes.Terminal.csproj" />
+    <ProjectReference Include="..\Vestigium.Themes.SolarizedDark\Vestigium.Themes.SolarizedDark.csproj" />
+    <ProjectReference Include="..\Vestigium.Themes.StandardWPF\Vestigium.Themes.StandardWPF.csproj" />
+    <ProjectReference Include="..\Vestigium.Themes.Monokai\Vestigium.Themes.Monokai.csproj" />
+    <ProjectReference Include="..\Vestigium.Themes.Sublime\Vestigium.Themes.Sublime.csproj" />
+    <ProjectReference Include="..\Vestigium.Themes.Dracula\Vestigium.Themes.Dracula.csproj" />
+  </ItemGroup>
+</Project>

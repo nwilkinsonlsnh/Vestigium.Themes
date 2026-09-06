@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI CANVAS LAYOUT STYLES
+         =======================================================================
+         Usage: 
+         <Canvas Style="{StaticResource Canvas.Standard}" Width="800" Height="600">
+             <Ellipse Canvas.Left="50" Canvas.Top="50" Width="20" Height="20" Fill="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+         </Canvas>
+
+         Available Styles:
+         - Canvas.Standard    : White absolute-positioning surface
+         - Canvas.Grid        : Light gray surface for schematics / diagrams
+         - Canvas.Transparent : Invisible overlay for custom drawing layers
+
+         Note: These styles only affect background and rendering hints.
+         Canvas does not support borders, padding, or complex templates.
+         ======================================================================= -->
+
+    <!-- Standard drawing surface -->
+    <Style x:Key="Canvas.Standard" TargetType="Canvas">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Card}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Schematic / blueprint surface -->
+    <Style x:Key="Canvas.Grid" TargetType="Canvas">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Surface.Header}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- Transparent overlay -->
+    <Style x:Key="Canvas.Transparent" TargetType="Canvas">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+</ResourceDictionary>

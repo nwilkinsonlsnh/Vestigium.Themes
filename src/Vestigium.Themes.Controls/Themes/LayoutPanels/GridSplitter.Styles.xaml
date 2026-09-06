@@ -1,0 +1,78 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- =======================================================================
+         COMMON UI GRIDSPLITTER STYLES
+         =======================================================================
+         Usage: 
+         <GridSplitter Style="{StaticResource GridSplitter.Standard}" 
+                       Grid.Column="1" Width="4" 
+                       HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+
+         Available Styles:
+         - GridSplitter.Standard : Transparent until hovered; highlights blue
+         - GridSplitter.Bar      : Always-visible neutral bar that highlights blue
+         ======================================================================= -->
+
+    <!-- Base -->
+    <Style x:Key="GridSplitter.Base" TargetType="GridSplitter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+
+    <!-- Standard – invisible until interaction -->
+    <Style x:Key="GridSplitter.Standard" TargetType="GridSplitter" BasedOn="{StaticResource GridSplitter.Base}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridSplitter">
+                    <Border x:Name="SplitterBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Transparent"
+                            BorderThickness="0" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="SplitterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter TargetName="SplitterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Pressed}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="SplitterBorder" Property="Background" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Bar – always visible divider -->
+    <Style x:Key="GridSplitter.Bar" TargetType="GridSplitter" BasedOn="{StaticResource GridSplitter.Base}">
+        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Stroke.Subtle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridSplitter">
+                    <Border x:Name="SplitterBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            CornerRadius="1" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="SplitterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Primary}" />
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter TargetName="SplitterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Accent.Pressed}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="SplitterBorder" Property="Background" Value="{DynamicResource Vestigium.Brushes.Grid.RowHover}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
