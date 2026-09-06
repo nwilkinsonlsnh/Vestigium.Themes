@@ -86,13 +86,13 @@
                         <Run Text="manager.Register(ThemeDefinition.FromPack(" />
                     </Paragraph>
                     <Paragraph>
-                        <Run Text="    "LightBlue", "Light Blue", "Vestigium.Themes.LightBlue", isDark: false));" />
+                        <Run Text='    "LightBlue", "Light Blue", "Vestigium.Themes.LightBlue", isDark: false));' />
                     </Paragraph>
                     <Paragraph>
-                        <Run Text="manager.Initialize(Application.Current, "LightBlue");" />
+                        <Run Text='manager.Initialize(Application.Current, "LightBlue");' />
                     </Paragraph>
                     <Paragraph>
-                        <Run Text="manager.SwitchTheme("Dracula");" />
+                        <Run Text='manager.SwitchTheme("Dracula");' />
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
