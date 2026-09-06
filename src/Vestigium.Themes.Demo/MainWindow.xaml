@@ -47,7 +47,7 @@
             </MenuItem>
             <MenuItem Header="_Help" Style="{StaticResource MenuItem.Standard}">
                 <MenuItem Header="_Developers Guide" Style="{StaticResource MenuItem.Standard}"
-                          InputGestureText="_Documents" />
+                          InputGestureText="_Documentation" />
             </MenuItem>
         </Menu>
 

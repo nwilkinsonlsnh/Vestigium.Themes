@@ -5,7 +5,7 @@ Modular WPF theming for the Vestigium suite. One control language, many palettes
 **Target:** .NET 10 / WPF / Visual Studio 2026  
 **Startup project:** `Vestigium.Themes.Demo`
 
-Verbose reference: [`_Documents/DevelopersGuide.md`](_Documents/DevelopersGuide.md)
+Verbose reference: [`_Documentation/DevelopersGuide_v1.0.md`](_Documentation/DevelopersGuide_v1.0.md)
 
 ## Open the demo
 
