@@ -5,25 +5,19 @@ Modular WPF theming for the Vestigium suite. One control language, many palettes
 **Target:** .NET 10 / WPF / Visual Studio 2026  
 **Startup project:** `Vestigium.Themes.Demo`
 
-## Solution
+Verbose reference: [`_Documents/DevelopersGuide.md`](_Documents/DevelopersGuide.md)
 
-| Project | Role |
-|---|---|
-| `Vestigium.Themes` | Contracts, `ThemeManager`, metrics |
-| `Vestigium.Themes.Controls` | Explicit styles (`Button.Primary`, …) bound with `{DynamicResource}` |
-| `Vestigium.Themes.LightBlue` | Palette — Fluent-inspired light |
-| `Vestigium.Themes.DarkMode` | Palette — low-glare dark |
-| `Vestigium.Themes.Terminal` | Palette — operator console |
-| `Vestigium.Themes.SolarizedDark` | Palette — Schoonover Solarized Dark |
-| `Vestigium.Themes.StandardWPF` | Palette — Windows chrome hues, same keys |
-| `Vestigium.Themes.Monokai` | Palette — Wimer Monokai |
-| `Vestigium.Themes.Sublime` | Palette — Sublime Text Mariana |
-| `Vestigium.Themes.Dracula` | Palette — Dracula |
-| `Vestigium.Themes.Demo` | Control gallery + switcher |
+## Open the demo
 
-Theme packages are XAML-only. The host registers the packages it references.
+1. Clone this repository.
+2. Open `Vestigium.Themes.slnx` in Visual Studio 2026.
+3. Set **Vestigium.Themes.Demo** as the startup project.
+4. Restore NuGet (`CommunityToolkit.Mvvm`, `Microsoft.Extensions.DependencyInjection`).
+5. Run on Windows.
 
-## Host integration
+The demo is a **TabControl** gallery: buttons, data entry, PingIQ / DnsIQ DataGrids, TraceIQ hops, navigation chrome, and a console log. Switch palettes from the header combo — style keys stay the same.
+
+## Host in three calls
 
 ```csharp
 var manager = new ThemeManager();
@@ -34,28 +28,23 @@ manager.Initialize(Application.Current, "LightBlue");
 manager.SwitchTheme("Dracula");
 ```
 
-`ThemeManager` replaces **only** the palette dictionary. Metrics and control styles stay merged.
-
-Views keep explicit styles:
+Views keep explicit styles. Color values inside those styles use `{DynamicResource}`:
 
 ```xml
 <Button Style="{StaticResource Button.Primary}" Content="Save" />
 ```
 
-`StaticResource` on the style key is correct. Color values inside those styles use `DynamicResource`, so a palette swap repaints the tree.
+## Projects
 
-## Standard WPF vs unload
+| Project | Role |
+|---|---|
+| `Vestigium.Themes` | Contracts, `ThemeManager`, metrics |
+| `Vestigium.Themes.Controls` | Explicit styles bound to tokens |
+| Eight `Vestigium.Themes.*` palettes | XAML-only; identical keys, different values |
+| `Vestigium.Themes.Demo` | Tabbed control gallery + switcher |
 
-- **StandardWPF** — Vestigium style keys still exist; hues approximate Windows chrome / `SystemColors`.
-- **`ThemeManager.Unload()`** — removes palettes and control dictionaries. Stock WPF returns. `Button.Primary` will not resolve.
+**StandardWPF** is a palette (keys still resolve). `ThemeManager.Unload()` is the escape hatch that returns stock WPF.
 
-## Contract
+## Palettes
 
-Every `Theme.xaml` must supply the keys in `ThemeResourceKeys`. `ThemeContractValidator` throws `ThemeLoadException` listing missing keys.
-
-## Pack URIs
-
-```
-pack://application:,,,/Vestigium.Themes.{Id};component/Themes/Theme.xaml
-pack://application:,,,/Vestigium.Themes.Controls;component/Themes/Controls.xaml
-```
+Light Blue · Dark Mode · Terminal · Solarized Dark · Standard WPF · Monokai · Sublime (Mariana) · Dracula

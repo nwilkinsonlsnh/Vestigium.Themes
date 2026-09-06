@@ -2,12 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Vestigium Themes Demo"
-        Width="1100" Height="720"
+        Width="1200" Height="800"
+        MinWidth="900" MinHeight="600"
         Background="{DynamicResource Vestigium.Brushes.Surface.Window}"
         TextElement.Foreground="{DynamicResource Vestigium.Brushes.Text.Primary}"
         FontFamily="{StaticResource Vestigium.Fonts.Family.UI}"
         FontSize="14">
     <DockPanel Style="{StaticResource DockPanel.Standard}">
+
         <Border Style="{StaticResource Border.AppHeader}" DockPanel.Dock="Top">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -16,13 +18,15 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Style="{StaticResource TextBlock.Heading}" Text="Vestigium Themes" />
-                    <TextBlock Style="{StaticResource TextBlock.Caption}" Text="Runtime palette swap — control catalog" />
+                    <TextBlock Style="{StaticResource TextBlock.Caption}"
+                               Text="Runtime palette swap · explicit styles · TabControl gallery" />
                 </StackPanel>
                 <ComboBox Grid.Column="1"
                           Style="{StaticResource ComboBox.Standard}"
                           ItemsSource="{Binding Themes}"
                           SelectedItem="{Binding SelectedTheme}"
-                          DisplayMemberPath="DisplayName" />
+                          DisplayMemberPath="DisplayName"
+                          ToolTip="Switch palette — Button.Primary and friends stay the same keys" />
             </Grid>
         </Border>
 
@@ -32,66 +36,307 @@
             </StatusBarItem>
             <Separator Style="{StaticResource Separator.StatusBar}" />
             <StatusBarItem Style="{StaticResource StatusBarItem.Standard}">
+                <TextBlock Text="{Binding SelectedPing.Host, StringFormat=Selected: {0}}" />
+            </StatusBarItem>
+            <Separator Style="{StaticResource Separator.StatusBar}" />
+            <StatusBarItem Style="{StaticResource StatusBarItem.Standard}">
                 <TextBlock Text="Contract 1.0  ·  net10.0-windows" />
             </StatusBarItem>
         </StatusBar>
 
-        <ScrollViewer Style="{StaticResource ScrollViewer.Standard}" Padding="16">
-            <StackPanel>
-                <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Buttons" Margin="0,0,0,8" />
-                <WrapPanel Style="{StaticResource WrapPanel.Toolbar}">
-                    <Button Style="{StaticResource Button.Primary}" Content="Primary" Margin="0,0,8,8" />
-                    <Button Style="{StaticResource Button.Secondary}" Content="Secondary" Margin="0,0,8,8" />
-                    <Button Style="{StaticResource Button.Success}" Content="Success" Margin="0,0,8,8" />
-                    <Button Style="{StaticResource Button.Warning}" Content="Warning" Margin="0,0,8,8" />
-                    <Button Style="{StaticResource Button.Danger}" Content="Danger" Margin="0,0,8,8" />
-                    <Button Style="{StaticResource Button.Utility}" Content="Utility" Margin="0,0,8,8" />
-                    <Button Style="{StaticResource Button.Primary}" Content="Disabled" IsEnabled="False" Margin="0,0,8,8" />
-                </WrapPanel>
+        <TabControl Style="{StaticResource TabControl.Standard}" Margin="12">
 
-                <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Data entry" Margin="0,16,0,8" />
-                <Grid>
+            <!-- ===== Buttons ===== -->
+            <TabItem Style="{StaticResource TabItem.Standard}" Header="Buttons">
+                <ScrollViewer Style="{StaticResource ScrollViewer.Standard}" Padding="16">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource TextBlock.Caption}"
+                                   Text="Button.Primary · Secondary · Success · Warning · Danger · Utility"
+                                   Margin="0,0,0,12" />
+                        <WrapPanel Style="{StaticResource WrapPanel.Toolbar}">
+                            <Button Style="{StaticResource Button.Primary}" Content="Primary" Margin="0,0,8,8"
+                                    Command="{Binding PingCommand}" />
+                            <Button Style="{StaticResource Button.Secondary}" Content="Secondary" Margin="0,0,8,8" />
+                            <Button Style="{StaticResource Button.Success}" Content="Success" Margin="0,0,8,8" />
+                            <Button Style="{StaticResource Button.Warning}" Content="Warning" Margin="0,0,8,8" />
+                            <Button Style="{StaticResource Button.Danger}" Content="Danger" Margin="0,0,8,8" />
+                            <Button Style="{StaticResource Button.Utility}" Content="Utility" Margin="0,0,8,8" />
+                            <Button Style="{StaticResource Button.Primary}" Content="Disabled" IsEnabled="False" Margin="0,0,8,8" />
+                        </WrapPanel>
+
+                        <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Status & progress" Margin="0,20,0,8" />
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <Ellipse Style="{StaticResource Ellipse.Success}" Width="10" Height="10" Margin="0,0,8,0" />
+                            <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Reachable" Margin="0,0,16,0" />
+                            <Ellipse Style="{StaticResource Ellipse.Warning}" Width="10" Height="10" Margin="0,0,8,0" />
+                            <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Loss" Margin="0,0,16,0" />
+                            <Ellipse Style="{StaticResource Ellipse.Error}" Width="10" Height="10" Margin="0,0,8,0" />
+                            <TextBlock Style="{StaticResource TextBlock.Error}" Text="Timeout" Margin="0,0,16,0" />
+                            <Ellipse Style="{StaticResource Ellipse.Accent}" Width="10" Height="10" Margin="0,0,8,0" />
+                            <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Running" />
+                        </StackPanel>
+                        <ProgressBar Style="{StaticResource ProgressBar.Standard}" Value="65" Maximum="100" Margin="0,0,0,8" />
+                        <ProgressBar Style="{StaticResource ProgressBar.Thin}" IsIndeterminate="True" Margin="0,0,0,8" />
+                        <ProgressBar Style="{StaticResource ProgressBar.Success}" Value="100" Maximum="100" Margin="0,0,0,8" />
+                        <ProgressBar Style="{StaticResource ProgressBar.Error}" Value="40" Maximum="100" />
+
+                        <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Sliders" Margin="0,20,0,8" />
+                        <Label Style="{StaticResource Label.Standard}" Content="Timeout (ms)" />
+                        <Slider Style="{StaticResource Slider.Filled}"
+                                Minimum="100" Maximum="5000" TickFrequency="100"
+                                Value="{Binding TimeoutMs}" />
+                        <Label Style="{StaticResource Label.Standard}" Content="Payload (bytes)" Margin="0,12,0,0" />
+                        <Slider Style="{StaticResource Slider.Stepped}"
+                                Minimum="8" Maximum="128" TickFrequency="8" IsSnapToTickEnabled="True"
+                                Value="{Binding Payload}" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ===== Data entry ===== -->
+            <TabItem Style="{StaticResource TabItem.Standard}" Header="Data entry">
+                <ScrollViewer Style="{StaticResource ScrollViewer.Standard}" Padding="16">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <GroupBox Style="{StaticResource GroupBox.Standard}" Header="Probe">
+                            <StackPanel Style="{StaticResource StackPanel.FormGroup}">
+                                <Label Style="{StaticResource Label.Standard}" Content="_Host" />
+                                <TextBox Style="{StaticResource TextBox.Standard}"
+                                         Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}" />
+                                <Label Style="{StaticResource Label.Standard}" Content="Password" />
+                                <PasswordBox Style="{StaticResource PasswordBox.Standard}" />
+                                <CheckBox Style="{StaticResource CheckBox.Standard}"
+                                          Content="Resolve PTR"
+                                          IsChecked="{Binding ResolvePtr}" />
+                                <CheckBox Style="{StaticResource CheckBox.ToggleSwitch}"
+                                          Content="Continuous ping"
+                                          IsChecked="{Binding Continuous}" />
+                                <Label Style="{StaticResource Label.Standard}" Content="Schedule" />
+                                <DatePicker Style="{StaticResource DatePicker.Standard}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Grid.Column="2" Style="{StaticResource GroupBox.Standard}" Header="Query">
+                            <StackPanel Style="{StaticResource StackPanel.FormGroup}">
+                                <Label Style="{StaticResource Label.Standard}" Content="Record type" />
+                                <ComboBox Style="{StaticResource ComboBox.Standard}"
+                                          SelectedValue="{Binding RecordType}"
+                                          SelectedValuePath="Content">
+                                    <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="A" />
+                                    <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="AAAA" />
+                                    <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="MX" />
+                                    <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="TXT" />
+                                    <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="CNAME" />
+                                </ComboBox>
+                                <Label Style="{StaticResource Label.Standard}" Content="Validation" />
+                                <TextBox Style="{StaticResource TextBox.Error}" Text="not a host" />
+                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                    <RadioButton Style="{StaticResource RadioButton.Standard}"
+                                                 GroupName="ProbeMode"
+                                                 Content="ICMP" IsChecked="{Binding Icmp}" Margin="0,0,12,0" />
+                                    <RadioButton Style="{StaticResource RadioButton.Standard}"
+                                                 GroupName="ProbeMode"
+                                                 Content="TCP" />
+                                </StackPanel>
+                                <CheckBox Style="{StaticResource CheckBox.Card}" Content="Don't fragment" Margin="0,12,0,0" />
+                                <CheckBox Style="{StaticResource CheckBox.Error}" Content="Invalid option" />
+                            </StackPanel>
+                        </GroupBox>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ===== PingIQ DataGrid ===== -->
+            <TabItem Style="{StaticResource TabItem.Standard}" Header="PingIQ">
+                <DockPanel Margin="16">
+                    <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                        <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="PingIQ" />
+                        <TextBlock Style="{StaticResource TextBlock.Caption}"
+                                   Text="ICMP reachability · DataGrid.Standard — switch palettes and watch row hover, selection, and status hues recompute." />
+                    </StackPanel>
+                    <DataGrid Style="{StaticResource DataGrid.Standard}"
+                              ItemsSource="{Binding PingTargets}"
+                              SelectedItem="{Binding SelectedPing}"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Host" Binding="{Binding Host}" Width="1.4*" />
+                            <DataGridTextColumn Header="IP" Binding="{Binding Ip}" Width="*" />
+                            <DataGridTextColumn Header="Avg" Binding="{Binding Avg}" Width="80" />
+                            <DataGridTextColumn Header="Loss" Binding="{Binding Loss}" Width="80" />
+                            <DataGridTemplateColumn Header="Status" Width="140">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Ellipse Width="10" Height="10" Margin="0,0,8,0">
+                                                <Ellipse.Style>
+                                                    <Style TargetType="Ellipse" BasedOn="{StaticResource Ellipse.Standard}">
+                                                        <Setter Property="Fill" Value="{DynamicResource Vestigium.Brushes.Status.Neutral}" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Status}" Value="Reachable">
+                                                                <Setter Property="Fill" Value="{DynamicResource Vestigium.Brushes.Status.Success}" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Status}" Value="Degraded">
+                                                                <Setter Property="Fill" Value="{DynamicResource Vestigium.Brushes.Status.Warning}" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Status}" Value="Timeout">
+                                                                <Setter Property="Fill" Value="{DynamicResource Vestigium.Brushes.Status.Error}" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Ellipse.Style>
+                                            </Ellipse>
+                                            <TextBlock Text="{Binding Status}" Style="{StaticResource TextBlock.Standard}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+
+            <!-- ===== DnsIQ ===== -->
+            <TabItem Style="{StaticResource TabItem.Standard}" Header="DnsIQ">
+                <DockPanel Margin="16">
+                    <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                        <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="DnsIQ" />
+                        <TextBlock Style="{StaticResource TextBlock.Caption}"
+                                   Text="vestigium.local · IN · DataGrid.Compact" />
+                    </StackPanel>
+                    <DataGrid Style="{StaticResource DataGrid.Compact}"
+                              ItemsSource="{Binding DnsRecords}"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="80" />
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1.2*" />
+                            <DataGridTextColumn Header="Data" Binding="{Binding Data}" Width="2*" />
+                            <DataGridTextColumn Header="TTL" Binding="{Binding Ttl}" Width="80" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+
+            <!-- ===== TraceIQ ===== -->
+            <TabItem Style="{StaticResource TabItem.Standard}" Header="TraceIQ">
+                <ScrollViewer Style="{StaticResource ScrollViewer.Standard}" Padding="16">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="TraceIQ" />
+                        <TextBlock Style="{StaticResource TextBlock.Caption}"
+                                   Text="Path to dns.google · 5 hops · Border.Card"
+                                   Margin="0,0,0,12" />
+                        <ItemsControl ItemsSource="{Binding TraceHops}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Style="{StaticResource WrapPanel.CardGrid}" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource Border.Card}" Width="200" Margin="0,0,12,12">
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource TextBlock.Caption}"
+                                                       Text="{Binding Hop, StringFormat=Hop {0}}" />
+                                            <TextBlock Style="{StaticResource TextBlock.Standard}"
+                                                       FontWeight="SemiBold"
+                                                       Text="{Binding Host}" />
+                                            <TextBlock Foreground="{DynamicResource Vestigium.Brushes.Accent.Primary}"
+                                                       FontFamily="{StaticResource Vestigium.Fonts.Family.Mono}"
+                                                       Text="{Binding Rtt}" />
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ===== Navigation ===== -->
+            <TabItem Style="{StaticResource TabItem.Standard}" Header="Navigation">
+                <Grid Margin="16">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="12" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel>
-                        <Label Style="{StaticResource Label.Standard}" Content="_Host" />
-                        <TextBox Style="{StaticResource TextBox.Standard}" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}" />
-                        <Label Style="{StaticResource Label.Standard}" Content="Password" Margin="0,8,0,0" />
-                        <PasswordBox Style="{StaticResource PasswordBox.Standard}" />
-                        <CheckBox Style="{StaticResource CheckBox.Standard}" Content="Resolve PTR" IsChecked="True" />
-                        <CheckBox Style="{StaticResource CheckBox.ToggleSwitch}" Content="Continuous ping" />
-                    </StackPanel>
+                    <Border Style="{StaticResource Border.AppSidebar}">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top"
+                                       Style="{StaticResource TextBlock.Caption}"
+                                       Text="TreeView.Flush · accordion"
+                                       Margin="8,8,8,4" />
+                            <TreeView Style="{StaticResource TreeView.Flush}">
+                                <TreeViewItem Header="Instruments" Style="{StaticResource TreeViewItem.AccordionParent}" IsExpanded="True">
+                                    <TreeViewItem Header="Hamilton" Style="{StaticResource TreeViewItem.AccordionGroup}" IsExpanded="True">
+                                        <TreeViewItem Header="Microlab Prep" Style="{StaticResource TreeViewItem.AccordionChild}" />
+                                        <TreeViewItem Header="STAR" Style="{StaticResource TreeViewItem.AccordionChild}" />
+                                    </TreeViewItem>
+                                    <TreeViewItem Header="Sciex" Style="{StaticResource TreeViewItem.AccordionGroup}">
+                                        <TreeViewItem Header="6500+" Style="{StaticResource TreeViewItem.AccordionChild}" />
+                                    </TreeViewItem>
+                                </TreeViewItem>
+                                <TreeViewItem Header="Network" Style="{StaticResource TreeViewItem.AccordionParent}" IsExpanded="True">
+                                    <TreeViewItem Header="PingIQ" Style="{StaticResource TreeViewItem.AccordionChild}" />
+                                    <TreeViewItem Header="DnsIQ" Style="{StaticResource TreeViewItem.AccordionChild}" />
+                                    <TreeViewItem Header="TraceIQ" Style="{StaticResource TreeViewItem.AccordionChild}" />
+                                </TreeViewItem>
+                            </TreeView>
+                        </DockPanel>
+                    </Border>
                     <StackPanel Grid.Column="2">
-                        <Label Style="{StaticResource Label.Standard}" Content="Record type" />
-                        <ComboBox Style="{StaticResource ComboBox.Standard}" SelectedIndex="0">
-                            <ComboBoxItem Content="A" />
-                            <ComboBoxItem Content="AAAA" />
-                            <ComboBoxItem Content="MX" />
-                            <ComboBoxItem Content="TXT" />
-                        </ComboBox>
-                        <Label Style="{StaticResource Label.Standard}" Content="Validation" Margin="0,8,0,0" />
-                        <TextBox Style="{StaticResource TextBox.Error}" Text="invalid host" />
-                        <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
-                            <RadioButton Style="{StaticResource RadioButton.Standard}" Content="ICMP" IsChecked="True" Margin="0,0,12,0" />
-                            <RadioButton Style="{StaticResource RadioButton.Standard}" Content="TCP" />
-                        </StackPanel>
+                        <Expander Style="{StaticResource Expander.Card}" Header="ListBox.Standard" IsExpanded="True">
+                            <ListBox Style="{StaticResource ListBox.Standard}" Height="160">
+                                <ListBoxItem Style="{StaticResource ListBoxItem.Standard}" Content="8.8.8.8 — dns.google" />
+                                <ListBoxItem Style="{StaticResource ListBoxItem.Standard}" Content="1.1.1.1 — one.one.one.one" />
+                                <ListBoxItem Style="{StaticResource ListBoxItem.Standard}" Content="10.0.0.1 — gw-lab-01" />
+                                <ListBoxItem Style="{StaticResource ListBoxItem.Standard}" Content="172.16.4.2 — edge.vestigium.local" />
+                            </ListBox>
+                        </Expander>
+                        <Expander Style="{StaticResource Expander.Standard}" Header="RadioButton.Pill" IsExpanded="True" Margin="0,12,0,0">
+                            <StackPanel Orientation="Horizontal" Margin="8">
+                                <RadioButton Style="{StaticResource RadioButton.Pill}" Content="General" IsChecked="True" Margin="0,0,8,0" />
+                                <RadioButton Style="{StaticResource RadioButton.Pill}" Content="Advanced" Margin="0,0,8,0" />
+                                <RadioButton Style="{StaticResource RadioButton.Pill}" Content="Logging" />
+                            </StackPanel>
+                        </Expander>
                     </StackPanel>
                 </Grid>
+            </TabItem>
 
-                <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Status" Margin="0,16,0,8" />
-                <StackPanel Orientation="Horizontal">
-                    <Ellipse Style="{StaticResource Ellipse.Success}" Margin="0,0,8,0" />
-                    <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Reachable" Margin="0,0,16,0" />
-                    <Ellipse Style="{StaticResource Ellipse.Warning}" Margin="0,0,8,0" />
-                    <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Loss" Margin="0,0,16,0" />
-                    <Ellipse Style="{StaticResource Ellipse.Error}" Margin="0,0,8,0" />
-                    <TextBlock Style="{StaticResource TextBlock.Error}" Text="Timeout" />
-                </StackPanel>
-                <ProgressBar Style="{StaticResource ProgressBar.Standard}" Value="65" Maximum="100" Margin="0,12,0,0" />
-            </StackPanel>
-        </ScrollViewer>
+            <!-- ===== Console ===== -->
+            <TabItem Style="{StaticResource TabItem.Standard}" Header="Console">
+                <DockPanel Margin="16">
+                    <TextBlock DockPanel.Dock="Top"
+                               Style="{StaticResource TextBlock.Caption}"
+                               Text="RichTextBox.ConsoleLog — semantic terminal surface (Vestigium.Brushes.Terminal.*)"
+                               Margin="0,0,0,8" />
+                    <RichTextBox Style="{StaticResource RichTextBox.ConsoleLog}" IsReadOnly="True">
+                        <FlowDocument FontFamily="{StaticResource Vestigium.Fonts.Family.Mono}" FontSize="13">
+                            <Paragraph>
+                                <Run Text="14:02:11.041  ICMP echo  8.8.8.8     time=12.4 ms" />
+                            </Paragraph>
+                            <Paragraph>
+                                <Run Text="14:02:12.044  ICMP echo  8.8.8.8     time=11.8 ms" />
+                            </Paragraph>
+                            <Paragraph>
+                                <Run Text="14:02:13.040  ICMP echo  10.0.0.1    Destination host unreachable" />
+                            </Paragraph>
+                            <Paragraph>
+                                <Run Text="14:02:14.051  ICMP echo  8.8.8.8     time=13.1 ms" />
+                            </Paragraph>
+                            <Paragraph>
+                                <Run Text="14:02:15.048  ICMP echo  1.1.1.1     time=8.2 ms" />
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </DockPanel>
+            </TabItem>
+
+        </TabControl>
     </DockPanel>
 </Window>
