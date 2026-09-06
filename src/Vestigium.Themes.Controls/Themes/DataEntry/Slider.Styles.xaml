@@ -96,7 +96,7 @@
                             <Setter TargetName="ThumbRing" Property="StrokeThickness" Value="2" />
                             <Setter TargetName="ThumbRing" Property="Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect Color="{DynamicResource Vestigium.Brushes.Accent.Primary}" Opacity="0.3" BlurRadius="6" ShadowDepth="0" />
+                                    <DropShadowEffect Color="{DynamicResource Vestigium.Colors.Accent.Primary}" Opacity="0.3" BlurRadius="6" ShadowDepth="0" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
