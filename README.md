@@ -15,7 +15,21 @@ Verbose reference: [`_Documents/DevelopersGuide.md`](_Documents/DevelopersGuide.
 4. Restore NuGet (`CommunityToolkit.Mvvm`, `Microsoft.Extensions.DependencyInjection`).
 5. Run on Windows.
 
-The demo is a **TabControl** gallery: buttons, data entry, PingIQ / DnsIQ DataGrids, TraceIQ hops, navigation chrome, and a console log. Switch palettes from the header combo — style keys stay the same.
+The demo is a **TabControl** gallery of the catalog plus PingIQ / DnsIQ / TraceIQ mockups:
+
+| Tab | What it shows |
+|---|---|
+| Buttons | Six intents, status dots, ProgressBar, sliders |
+| Data entry | TextBox, PasswordBox, ComboBox, DatePicker, CheckBox, radios, error variants |
+| Lists | ListBox.Standard / Card, ListView + GridView |
+| PingIQ | `DataGrid.Standard` with status triggers, context menu, detail strip |
+| DnsIQ | `DataGrid.Compact` with type chips |
+| TraceIQ | `Border.Card` hops + `DataGrid.Card` |
+| Navigation | TreeView accordion, nested TabControl (Standard / Pill / Vertical) |
+| Layout | GridSplitter, Calendar, borders, typography |
+| Console | Bound terminal log, RichTextBox.ConsoleLog, CodeViewer |
+
+Switch palettes from the header combo or **View → Theme**. Style keys stay the same.
 
 ## Host in three calls
 

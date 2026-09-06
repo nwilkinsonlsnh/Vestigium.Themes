@@ -1,0 +1,52 @@
+<UserControl x:Class="Vestigium.Themes.Demo.Views.TraceIqTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+            <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="TraceIQ" />
+            <TextBlock Style="{StaticResource TextBlock.Caption}"
+                       Text="Path to dns.google · 5 hops · Border.Card tiles plus DataGrid.Card" />
+        </StackPanel>
+
+        <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding TraceHops}" Margin="0,0,0,12">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Style="{StaticResource WrapPanel.CardGrid}" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource Border.Card}" Width="200" Margin="0,0,12,12">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource TextBlock.Caption}"
+                                       Text="{Binding Hop, StringFormat=Hop {0}}" />
+                            <TextBlock Style="{StaticResource TextBlock.Standard}"
+                                       FontWeight="SemiBold"
+                                       Text="{Binding Host}" />
+                            <TextBlock FontFamily="{StaticResource Vestigium.Fonts.Family.Mono}"
+                                       Foreground="{DynamicResource Vestigium.Brushes.Text.Secondary}"
+                                       Text="{Binding Address}" />
+                            <TextBlock Foreground="{DynamicResource Vestigium.Brushes.Accent.Primary}"
+                                       FontFamily="{StaticResource Vestigium.Fonts.Family.Mono}"
+                                       Text="{Binding Rtt}" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <DataGrid Style="{StaticResource DataGrid.Card}"
+                  ItemsSource="{Binding TraceHops}"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Hop" Binding="{Binding Hop}" Width="60" />
+                <DataGridTextColumn Header="Host" Binding="{Binding Host}" Width="1.4*" />
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="1.2*" />
+                <DataGridTextColumn Header="RTT" Binding="{Binding Rtt}" Width="90" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="110" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

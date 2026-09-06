@@ -1,0 +1,56 @@
+<UserControl x:Class="Vestigium.Themes.Demo.Views.ButtonsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer Style="{StaticResource ScrollViewer.Standard}" Padding="16">
+        <StackPanel>
+            <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Buttons" />
+            <TextBlock Style="{StaticResource TextBlock.Caption}"
+                       Text="Button.Primary · Secondary · Success · Warning · Danger · Utility"
+                       Margin="0,0,0,12" />
+
+            <WrapPanel Style="{StaticResource WrapPanel.Toolbar}">
+                <Button Style="{StaticResource Button.Primary}" Content="Primary" Margin="0,0,8,8"
+                        Command="{Binding PingCommand}" />
+                <Button Style="{StaticResource Button.Secondary}" Content="Secondary" Margin="0,0,8,8" />
+                <Button Style="{StaticResource Button.Success}" Content="Success" Margin="0,0,8,8" />
+                <Button Style="{StaticResource Button.Warning}" Content="Warning" Margin="0,0,8,8" />
+                <Button Style="{StaticResource Button.Danger}" Content="Danger" Margin="0,0,8,8"
+                        Command="{Binding StopCommand}" />
+                <Button Style="{StaticResource Button.Utility}" Content="Utility" Margin="0,0,8,8" />
+                <Button Style="{StaticResource Button.Primary}" Content="Disabled" IsEnabled="False" Margin="0,0,8,8" />
+            </WrapPanel>
+
+            <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Status dots" Margin="0,20,0,8" />
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                <Ellipse Style="{StaticResource Ellipse.Success}" Width="10" Height="10" Margin="0,0,8,0" />
+                <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Reachable" Margin="0,0,16,0" />
+                <Ellipse Style="{StaticResource Ellipse.Warning}" Width="10" Height="10" Margin="0,0,8,0" />
+                <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Degraded" Margin="0,0,16,0" />
+                <Ellipse Style="{StaticResource Ellipse.Error}" Width="10" Height="10" Margin="0,0,8,0" />
+                <TextBlock Style="{StaticResource TextBlock.Error}" Text="Timeout" Margin="0,0,16,0" />
+                <Ellipse Style="{StaticResource Ellipse.Accent}" Width="10" Height="10" Margin="0,0,8,0" />
+                <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Running" />
+            </StackPanel>
+
+            <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="ProgressBar" Margin="0,8,0,8" />
+            <ProgressBar Style="{StaticResource ProgressBar.Standard}" Value="65" Maximum="100" Margin="0,0,0,8" />
+            <ProgressBar Style="{StaticResource ProgressBar.Thin}" IsIndeterminate="True" Margin="0,0,0,8" />
+            <ProgressBar Style="{StaticResource ProgressBar.Success}" Value="100" Maximum="100" Margin="0,0,0,8" />
+            <ProgressBar Style="{StaticResource ProgressBar.Error}" Value="40" Maximum="100" />
+
+            <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Sliders" Margin="0,20,0,8" />
+            <Label Style="{StaticResource Label.Standard}" Content="Timeout (ms)" />
+            <Slider Style="{StaticResource Slider.Filled}"
+                    Minimum="100" Maximum="5000" TickFrequency="100"
+                    Value="{Binding TimeoutMs}" />
+            <Label Style="{StaticResource Label.Standard}" Content="Payload (bytes)" Margin="0,12,0,0" />
+            <Slider Style="{StaticResource Slider.Stepped}"
+                    Minimum="8" Maximum="128" TickFrequency="8" IsSnapToTickEnabled="True"
+                    Value="{Binding Payload}" />
+            <Label Style="{StaticResource Label.Standard}" Content="TTL" Margin="0,12,0,0" />
+            <Slider Style="{StaticResource Slider.Standard}"
+                    Minimum="1" Maximum="255"
+                    Value="{Binding Ttl}" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

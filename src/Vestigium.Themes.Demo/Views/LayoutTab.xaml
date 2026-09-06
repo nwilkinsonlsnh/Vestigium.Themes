@@ -1,0 +1,85 @@
+<UserControl x:Class="Vestigium.Themes.Demo.Views.LayoutTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer Style="{StaticResource ScrollViewer.Standard}" Padding="16">
+        <StackPanel>
+            <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Layout, calendar, type" />
+            <TextBlock Style="{StaticResource TextBlock.Caption}"
+                       Text="GridSplitter.Bar · Calendar.Standard · Border.* · typography"
+                       Margin="0,0,0,12" />
+
+            <Grid Style="{StaticResource Grid.Standard}" Height="280">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MinWidth="220" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="*" MinWidth="220" />
+                </Grid.ColumnDefinitions>
+                <GroupBox Style="{StaticResource GroupBox.Card}" Header="Calendar.Standard">
+                    <Calendar Style="{StaticResource Calendar.Standard}" />
+                </GroupBox>
+                <GridSplitter Grid.Column="1" Style="{StaticResource GridSplitter.Bar}"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="8" />
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="8" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border Style="{StaticResource Border.Accent}" Padding="12">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource TextBlock.Caption}" Text="Border.Accent" />
+                            <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Probe complete — 8.8.8.8 reachable." />
+                        </StackPanel>
+                    </Border>
+                    <GridSplitter Grid.Row="1" Style="{StaticResource GridSplitter.Standard}"
+                                  Height="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                  ResizeDirection="Rows" />
+                    <Border Grid.Row="2" Style="{StaticResource Border.Error}" Padding="12">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource TextBlock.Caption}" Text="Border.Error" />
+                            <TextBlock Style="{StaticResource TextBlock.Error}" Text="gw-lab-01 timed out (100% loss)." />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Surfaces" Margin="0,20,0,8" />
+            <WrapPanel Style="{StaticResource WrapPanel.CardGrid}">
+                <Border Style="{StaticResource Border.Card}" Width="180" Margin="0,0,12,12" Padding="12">
+                    <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Border.Card" />
+                </Border>
+                <Border Style="{StaticResource Border.CardShadow}" Width="180" Margin="0,0,12,12" Padding="12">
+                    <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Border.CardShadow" />
+                </Border>
+                <Border Style="{StaticResource Border.Panel}" Width="180" Margin="0,0,12,12" Padding="12">
+                    <TextBlock Style="{StaticResource TextBlock.Standard}" Text="Border.Panel" />
+                </Border>
+                <ContentControl Style="{StaticResource ContentControl.Card}" Width="180" Margin="0,0,12,12">
+                    <TextBlock Style="{StaticResource TextBlock.Standard}" Text="ContentControl.Card" Margin="12" />
+                </ContentControl>
+            </WrapPanel>
+
+            <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="Typography" Margin="0,8,0,8" />
+            <TextBlock Style="{StaticResource TextBlock.Heading}" Text="TextBlock.Heading" />
+            <TextBlock Style="{StaticResource TextBlock.Subheader}" Text="TextBlock.Subheader" />
+            <TextBlock Style="{StaticResource TextBlock.Standard}" Text="TextBlock.Standard — body copy for diagnostic chrome." />
+            <TextBlock Style="{StaticResource TextBlock.Caption}" Text="TextBlock.Caption — muted helper line." />
+            <TextBlock Style="{StaticResource TextBlock.Error}" Text="TextBlock.Error — validation or timeout." />
+            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                <Label Style="{StaticResource Label.Standard}" Content="Label.Standard" />
+                <Label Style="{StaticResource Label.Bold}" Content="Label.Bold" />
+                <Label Style="{StaticResource Label.Small}" Content="Label.Small" />
+            </StackPanel>
+
+            <Separator Style="{StaticResource Separator.Standard}" Margin="0,16" />
+            <Separator Style="{StaticResource Separator.Heavy}" Margin="0,0,0,16" />
+
+            <StackPanel Orientation="Horizontal">
+                <Rectangle Style="{StaticResource Rectangle.Accent}" Width="24" Height="24" Margin="0,0,12,0" />
+                <Rectangle Style="{StaticResource Rectangle.Rounded}" Width="48" Height="24" Margin="0,0,12,0" />
+                <Rectangle Style="{StaticResource Rectangle.Divider}" Width="2" Height="24" Margin="0,0,12,0" />
+                <Ellipse Style="{StaticResource Ellipse.Accent}" Width="16" Height="16" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

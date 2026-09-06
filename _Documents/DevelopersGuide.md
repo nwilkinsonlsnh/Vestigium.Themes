@@ -32,7 +32,10 @@ Vestigium.Themes.slnx
 ├── src/Vestigium.Themes.Monokai
 ├── src/Vestigium.Themes.Sublime         Mariana (Sublime Text default)
 ├── src/Vestigium.Themes.Dracula
-├── src/Vestigium.Themes.Demo            TabControl gallery + combo switcher
+├── src/Vestigium.Themes.Demo            WinExe gallery
+│   ├── MainWindow.xaml                 Menu + ToolBar + TabControl shell
+│   ├── MainViewModel.cs                IThemeManager + mock Ping/DNS/trace data
+│   └── Views/                          one UserControl per tab
 └── _Documents/                         this guide
 ```
 
@@ -326,19 +329,44 @@ That style is bound to `Vestigium.Brushes.Terminal.*`, not a hardcoded `#1E1E1E`
 
 ## 10. The Demo
 
-`Vestigium.Themes.Demo` is the visual contract test.
+`Vestigium.Themes.Demo` is the visual contract test. It is a small MVVM host (`CommunityToolkit.Mvvm` + Microsoft.Extensions.DependencyInjection), not a production instrument — but the chrome is the same language PingIQ / DnsIQ / TraceIQ will use.
 
-- Header combo bound to `IThemeManager.AvailableThemes`. Changing `SelectedTheme` calls `SwitchTheme`.
-- **TabControl.Standard** keeps the window usable:
-  - **Buttons** — six intents, disabled, status dots, progress, sliders
-  - **Data entry** — text, password, combo, date, check, toggle, radio, error field
-  - **PingIQ** — `DataGrid.Standard` with status triggers
-  - **DnsIQ** — `DataGrid.Compact`
-  - **TraceIQ** — `Border.Card` hop tiles
-  - **Navigation** — accordion TreeView, ListBox, pill radios, Expander
-  - **Console** — `RichTextBox.ConsoleLog`
+### Shell
 
-When you add a style key, add a specimen to the matching tab.
+- **Menu.Standard** — File (Ping / Stop / Export / Exit), View → Theme (all eight palettes), Help.
+- **ToolBarTray.Standard** + **ToolBar.Standard** — Ping / Stop / Export with explicit button styles.
+- **Border.AppHeader** — title plus combo bound to `IThemeManager.AvailableThemes`. Changing `SelectedTheme` calls `SwitchTheme`.
+- **StatusBar.Standard** — current theme, selected ping host, status text, contract version.
+- **TabControl.Standard** — one tab per specimen group so the window stays usable at 1280×860.
+
+### Tabs (`Views/`)
+
+| Tab | UserControl | Specimens |
+|-----|-------------|-----------|
+| Buttons | `ButtonsTab` | Six button intents, disabled, Ellipse status dots, ProgressBar.*, Slider.Filled / Stepped / Standard |
+| Data entry | `DataEntryTab` | GroupBox Probe/Query, TextBox, PasswordBox, ComboBox (standard / editable / error), DatePicker, CheckBox / ToggleSwitch / Card / Error, RadioButton.Standard / Card / TextLink |
+| Lists | `ListsTab` | ListBox.Standard, ListBox.Card, ListView.Standard + GridView bound to the same `PingTargets` |
+| PingIQ | `PingIqTab` | **DataGrid.Standard** — Host, IP, Min/Avg/Max, Loss, Sent, status `DataTrigger` fills. Context menu. Detail strip for `SelectedPing`. |
+| DnsIQ | `DnsIqTab` | Query bar + **DataGrid.Compact** with type chips (`Status.InfoFill`) |
+| TraceIQ | `TraceIqTab` | `Border.Card` hop tiles + **DataGrid.Card** |
+| Navigation | `NavigationTab` | TreeView.Flush accordion, GridSplitter, nested TabControl.Standard / Pill / Vertical, RadioButton.Pill / HorizontalTab / VerticalNav, Expander.Card |
+| Layout | `LayoutTab` | Calendar.Standard, GridSplitter.Bar, Border.Accent / Error / Card / CardShadow / Panel, ContentControl.Card, typography, separators, rectangles |
+| Console | `ConsoleTab` | Bound `ItemsControl` on Terminal.* brushes (level colors), RichTextBox.ConsoleLog, RichTextBox.CodeViewer |
+
+When you add a style key, add a specimen to the matching tab. Do not dump every control onto one surface — WPF form real estate is the reason the demo is tabbed.
+
+### DataGrid notes (PingIQ)
+
+Status fills **must** be `DataTrigger` → `Vestigium.Brushes.Status.Success|Warning|Error`. A static `Ellipse.Success` on every row would lie about timeouts.
+
+```xml
+<DataTrigger Binding="{Binding Status}" Value="Timeout">
+    <Setter Property="Fill" Value="{DynamicResource Vestigium.Brushes.Status.Error}" />
+</DataTrigger>
+```
+
+`DataGrid.Standard` already applies header / row / cell styles, full-row selection, and horizontal gridlines. Use Compact for DNS, Card for quieter hop lists.
+
 
 ---
 

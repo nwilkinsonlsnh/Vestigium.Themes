@@ -1,0 +1,77 @@
+<UserControl x:Class="Vestigium.Themes.Demo.Views.DataEntryTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer Style="{StaticResource ScrollViewer.Standard}" Padding="16">
+        <Grid Style="{StaticResource Grid.Standard}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="16" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <GroupBox Style="{StaticResource GroupBox.Standard}" Header="Probe">
+                <StackPanel Style="{StaticResource StackPanel.FormGroup}">
+                    <Label Style="{StaticResource Label.Standard}" Content="_Host" />
+                    <TextBox Style="{StaticResource TextBox.Standard}"
+                             Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Style="{StaticResource Label.Standard}" Content="Password" />
+                    <PasswordBox Style="{StaticResource PasswordBox.Standard}" />
+                    <CheckBox Style="{StaticResource CheckBox.Standard}"
+                              Content="Resolve PTR"
+                              IsChecked="{Binding ResolvePtr}" />
+                    <CheckBox Style="{StaticResource CheckBox.ToggleSwitch}"
+                              Content="Continuous ping"
+                              IsChecked="{Binding Continuous}" />
+                    <Label Style="{StaticResource Label.Standard}" Content="Schedule" />
+                    <DatePicker Style="{StaticResource DatePicker.Standard}" />
+                    <Label Style="{StaticResource Label.Small}" Content="Read-only snapshot" Margin="0,8,0,0" />
+                    <TextBox Style="{StaticResource TextBox.ReadOnly}" Text="8.8.8.8  ttl=128  payload=32" IsReadOnly="True" />
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Grid.Column="2" Style="{StaticResource GroupBox.Card}" Header="Query">
+                <StackPanel Style="{StaticResource StackPanel.FormGroup}">
+                    <Label Style="{StaticResource Label.Standard}" Content="Record type" />
+                    <ComboBox Style="{StaticResource ComboBox.Standard}"
+                              SelectedValue="{Binding RecordType}"
+                              SelectedValuePath="Content">
+                        <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="A" />
+                        <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="AAAA" />
+                        <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="MX" />
+                        <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="TXT" />
+                        <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="CNAME" />
+                    </ComboBox>
+                    <Label Style="{StaticResource Label.Standard}" Content="Editable combo" />
+                    <ComboBox Style="{StaticResource ComboBox.Editable}" IsEditable="True" Text="vestigium.local">
+                        <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="vestigium.local" />
+                        <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="dns.google" />
+                    </ComboBox>
+                    <Label Style="{StaticResource Label.Standard}" Content="Validation" />
+                    <TextBox Style="{StaticResource TextBox.Error}" Text="not a host" />
+                    <ComboBox Style="{StaticResource ComboBox.Error}" SelectedIndex="0">
+                        <ComboBoxItem Style="{StaticResource ComboBoxItem.Standard}" Content="missing zone" />
+                    </ComboBox>
+                    <DatePicker Style="{StaticResource DatePicker.Error}" />
+                    <PasswordBox Style="{StaticResource PasswordBox.Error}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <RadioButton Style="{StaticResource RadioButton.Standard}"
+                                     GroupName="ProbeMode"
+                                     Content="ICMP" IsChecked="{Binding Icmp}" Margin="0,0,12,0" />
+                        <RadioButton Style="{StaticResource RadioButton.Standard}"
+                                     GroupName="ProbeMode"
+                                     Content="TCP" />
+                    </StackPanel>
+                    <CheckBox Style="{StaticResource CheckBox.Card}" Content="Do not fragment" Margin="0,12,0,0" />
+                    <CheckBox Style="{StaticResource CheckBox.Error}" Content="Invalid option" />
+                    <RadioButton Style="{StaticResource RadioButton.Card}" Content="Prefer IPv4" Margin="0,8,0,0" />
+                    <RadioButton Style="{StaticResource RadioButton.TextLink}" Content="Reset to defaults" />
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
