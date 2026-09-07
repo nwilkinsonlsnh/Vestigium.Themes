@@ -1,6 +1,6 @@
 # Vestigium.Themes — Developers Guide v1.0
 
-Verbose reference for hosts that consume the library. For clone-and-run steps see [`README.md`](../README.md).
+Verbose reference for hosts that consume the library. For clone-and-run steps see [`README.md`](../README.md). Product requirements: [`Requirements_v1.0.md`](Requirements_v1.0.md).
 
 ---
 
@@ -36,7 +36,7 @@ Vestigium.Themes.slnx
 │   ├── MainWindow.xaml                 Menu + ToolBar + TabControl shell
 │   ├── MainViewModel.cs                IThemeManager + mock Ping/DNS/trace data
 │   └── Views/                          one UserControl per tab
-└── _Documentation/                     this guide (DevelopersGuide_v1.0.md)
+└── _Documentation/                     DevelopersGuide_v1.0.md, Requirements_v1.0.md
 ```
 
 Theme packages are **XAML-only** (`EnableDefaultCompileItems=false`). They compile as WPF class libraries so pack URIs resolve.
