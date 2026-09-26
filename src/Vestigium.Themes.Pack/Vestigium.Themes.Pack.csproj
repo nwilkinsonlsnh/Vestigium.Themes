@@ -15,7 +15,6 @@
     <IsPackable>true</IsPackable>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
-    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);_PackProjectReferenceOutputs</TargetsForTfmSpecificBuildOutput>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
 
     <Version>1.0.0</Version>
@@ -36,28 +35,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vestigium.Themes\Vestigium.Themes.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\Vestigium.Themes.Controls\Vestigium.Themes.Controls.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\Vestigium.Themes.LightBlue\Vestigium.Themes.LightBlue.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\Vestigium.Themes.DarkMode\Vestigium.Themes.DarkMode.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\Vestigium.Themes.Terminal\Vestigium.Themes.Terminal.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\Vestigium.Themes.SolarizedDark\Vestigium.Themes.SolarizedDark.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\Vestigium.Themes.StandardWPF\Vestigium.Themes.StandardWPF.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\Vestigium.Themes.Monokai\Vestigium.Themes.Monokai.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\Vestigium.Themes.Sublime\Vestigium.Themes.Sublime.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\Vestigium.Themes.Dracula\Vestigium.Themes.Dracula.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes\Vestigium.Themes.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\Vestigium.Themes.Controls\Vestigium.Themes.Controls.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\Vestigium.Themes.LightBlue\Vestigium.Themes.LightBlue.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\Vestigium.Themes.DarkMode\Vestigium.Themes.DarkMode.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\Vestigium.Themes.Terminal\Vestigium.Themes.Terminal.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\Vestigium.Themes.SolarizedDark\Vestigium.Themes.SolarizedDark.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\Vestigium.Themes.StandardWPF\Vestigium.Themes.StandardWPF.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\Vestigium.Themes.Monokai\Vestigium.Themes.Monokai.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\Vestigium.Themes.Sublime\Vestigium.Themes.Sublime.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\Vestigium.Themes.Dracula\Vestigium.Themes.Dracula.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
   </ItemGroup>
 
   <Target Name="_SetPublishedPackageId" BeforeTargets="GenerateNuspec;Pack">
     <PropertyGroup>
       <PackageId>Vestigium.Themes</PackageId>
-      <PackageId Condition="'$(PackageId)' == ''">Vestigium.Themes</PackageId>
     </PropertyGroup>
   </Target>
 
-  <Target Name="_PackProjectReferenceOutputs" DependsOnTargets="BuildOnlySettings;ResolveReferences">
+  <Target Name="_PackProductAssemblies" BeforeTargets="_GetPackageFiles;GenerateNuspec" DependsOnTargets="ResolveReferences;Build">
     <ItemGroup>
-      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+      <_ProductAssembly Include="@(ReferencePath)" Condition="'%(ReferencePath.ReferenceSourceTarget)' == 'ProjectReference'" />
+      <TfmSpecificPackageFile Include="@(_ProductAssembly)">
+        <PackagePath>lib/$(TargetFramework)/%(FileName)%(Extension)</PackagePath>
+      </TfmSpecificPackageFile>
     </ItemGroup>
   </Target>
 </Project>
