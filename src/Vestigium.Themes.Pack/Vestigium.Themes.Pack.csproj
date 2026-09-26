@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <!--
-    Pack-only bag. Not a product assembly.
-    PackageId Vestigium.Themes → one nupkg, ten DLLs under lib/net10.0-windows/.
-    Children stay IsPackable=false so they become files, not package dependencies.
+    Pack-only bag. Restore name is Vestigium.Themes.Pack (this file).
+    PackageId becomes Vestigium.Themes only when writing the nuspec so restore
+    does not collide with src/Vestigium.Themes.
   -->
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
@@ -10,13 +10,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
+    <AssemblyName>Vestigium.Themes.Pack</AssemblyName>
+    <RootNamespace>Vestigium.Themes.Pack</RootNamespace>
     <IsPackable>true</IsPackable>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);_PackProjectReferenceOutputs</TargetsForTfmSpecificBuildOutput>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
 
-    <PackageId>Vestigium.Themes</PackageId>
     <Version>1.0.0</Version>
     <Authors>Vestigium</Authors>
     <Company>Wilkinson Business</Company>
@@ -46,6 +47,13 @@
     <ProjectReference Include="..\Vestigium.Themes.Sublime\Vestigium.Themes.Sublime.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\Vestigium.Themes.Dracula\Vestigium.Themes.Dracula.csproj" PrivateAssets="all" />
   </ItemGroup>
+
+  <Target Name="_SetPublishedPackageId" BeforeTargets="GenerateNuspec;Pack">
+    <PropertyGroup>
+      <PackageId>Vestigium.Themes</PackageId>
+      <PackageId Condition="'$(PackageId)' == ''">Vestigium.Themes</PackageId>
+    </PropertyGroup>
+  </Target>
 
   <Target Name="_PackProjectReferenceOutputs" DependsOnTargets="BuildOnlySettings;ResolveReferences">
     <ItemGroup>
