@@ -16,6 +16,7 @@
   </metadata>
   <files>
     <file src="README.md" target="README.md" />
+    <file src="LICENSE.md" target="LICENSE.md" />
     <file src="src\Vestigium.Themes\bin\Release\net10.0-windows\Vestigium.Themes.dll" target="lib\net10.0-windows7.0\" />
     <file src="src\Vestigium.Themes.Controls\bin\Release\net10.0-windows\Vestigium.Themes.Controls.dll" target="lib\net10.0-windows7.0\" />
     <file src="src\Vestigium.Themes.LightBlue\bin\Release\net10.0-windows\Vestigium.Themes.LightBlue.dll" target="lib\net10.0-windows7.0\" />
