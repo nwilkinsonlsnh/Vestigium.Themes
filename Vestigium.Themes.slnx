@@ -9,4 +9,5 @@
   <Project Path="src/Vestigium.Themes.Monokai/Vestigium.Themes.Monokai.csproj" />
   <Project Path="src/Vestigium.Themes.Sublime/Vestigium.Themes.Sublime.csproj" />
   <Project Path="src/Vestigium.Themes.Dracula/Vestigium.Themes.Dracula.csproj" />
+  <Project Path="src/Vestigium.Themes.Pack/Vestigium.Themes.Pack.csproj" />
 </Solution>

@@ -5,3 +5,6 @@
 *.suo
 *.userosscache
 *.sln.docstates
+artifacts/nuget/
+*.nupkg
+*.snupkg

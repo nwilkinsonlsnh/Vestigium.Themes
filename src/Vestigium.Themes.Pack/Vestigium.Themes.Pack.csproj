@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Pack-only bag. Not a product assembly.
+    PackageId Vestigium.Themes → one nupkg, ten DLLs under lib/net10.0-windows/.
+    Children stay IsPackable=false so they become files, not package dependencies.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>true</IsPackable>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);_PackProjectReferenceOutputs</TargetsForTfmSpecificBuildOutput>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+
+    <PackageId>Vestigium.Themes</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Vestigium</Authors>
+    <Company>Wilkinson Business</Company>
+    <Copyright>Copyright (c) 2026 Nathaniel Wilkinson / LSNH</Copyright>
+    <Description>Modular WPF theming for the Vestigium suite — ThemeManager, control catalog, and all v1 palettes in one package.</Description>
+    <PackageTags>wpf;themes;vestigium;mvvm;net10</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/nwilkinsonlsnh/Vestigium.Themes</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nwilkinsonlsnh/Vestigium.Themes</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vestigium.Themes\Vestigium.Themes.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes.Controls\Vestigium.Themes.Controls.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes.LightBlue\Vestigium.Themes.LightBlue.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes.DarkMode\Vestigium.Themes.DarkMode.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes.Terminal\Vestigium.Themes.Terminal.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes.SolarizedDark\Vestigium.Themes.SolarizedDark.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes.StandardWPF\Vestigium.Themes.StandardWPF.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes.Monokai\Vestigium.Themes.Monokai.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes.Sublime\Vestigium.Themes.Sublime.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes.Dracula\Vestigium.Themes.Dracula.csproj" PrivateAssets="all" />
+  </ItemGroup>
+
+  <Target Name="_PackProjectReferenceOutputs" DependsOnTargets="BuildOnlySettings;ResolveReferences">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+  </Target>
+</Project>

@@ -3,36 +3,18 @@
 Modular WPF theming for the Vestigium suite. One control language, many palettes, runtime swap without rebuilding the host.
 
 **Target:** .NET 10 / WPF / Visual Studio 2026  
-**Startup project:** `Vestigium.Themes.Demo`
+**Package:** `Vestigium.Themes` 1.0.0 — one nupkg, ten DLLs (core, catalog, eight palettes).
 
 Verbose reference: [`_Documentation/DevelopersGuide_v1.0.md`](_Documentation/DevelopersGuide_v1.0.md)  
 Requirements: [`_Documentation/Requirements_v1.0.md`](_Documentation/Requirements_v1.0.md)
 
-## Open the demo
+## Consume
 
-1. Clone this repository.
-2. Open `Vestigium.Themes.slnx` in Visual Studio 2026.
-3. Set **Vestigium.Themes.Demo** as the startup project.
-4. Restore NuGet (`CommunityToolkit.Mvvm`, `Microsoft.Extensions.DependencyInjection`).
-5. Run on Windows.
+```text
+dotnet add package Vestigium.Themes --version 1.0.0
+```
 
-The demo is a **TabControl** gallery of the catalog plus PingIQ / DnsIQ / TraceIQ mockups:
-
-| Tab | What it shows |
-|---|---|
-| Buttons | Six intents, status dots, ProgressBar, sliders |
-| Data entry | TextBox, PasswordBox, ComboBox, DatePicker, CheckBox, radios, error variants |
-| Lists | ListBox.Standard / Card, ListView + GridView |
-| PingIQ | `DataGrid.Standard` with status triggers, context menu, detail strip |
-| DnsIQ | `DataGrid.Compact` with type chips |
-| TraceIQ | `Border.Card` hops + `DataGrid.Card` |
-| Navigation | TreeView accordion, nested TabControl (Standard / Pill / Vertical) |
-| Layout | GridSplitter, Calendar, borders, typography |
-| Console | Bound terminal log, RichTextBox.ConsoleLog, CodeViewer |
-
-Switch palettes from the header combo or **View → Theme**. Style keys stay the same.
-
-## Host in three calls
+The host still registers only the palettes it will switch. Unused palette DLLs sit in `bin`.
 
 ```csharp
 var manager = new ThemeManager();
@@ -43,11 +25,29 @@ manager.Initialize(Application.Current, "LightBlue");
 manager.SwitchTheme("Dracula");
 ```
 
-Views keep explicit styles. Color values inside those styles use `{DynamicResource}`:
+Call `Initialize` in `OnStartup` before the first window is parsed. Views keep explicit styles. Color values inside those styles use `{DynamicResource}`:
 
 ```xml
 <Button Style="{StaticResource Button.Primary}" Content="Save" />
 ```
+
+## Pack (maintainers)
+
+Libraries are not packable. Pack the bag project:
+
+```powershell
+dotnet pack src\Vestigium.Themes.Pack\Vestigium.Themes.Pack.csproj -c Release -o artifacts\nuget
+```
+
+Inspect `lib/net10.0-windows/` in the nupkg. You want the ten product DLLs and no `Vestigium.Themes.Pack.dll`.
+
+```powershell
+dotnet nuget push artifacts\nuget\Vestigium.Themes.1.0.0.nupkg `
+  --api-key $env:VESTIGIUM_NUGET_APIKEY `
+  --source https://api.nuget.org/v3/index.json
+```
+
+Do not commit the API key. Do not pack from `Vestigium.Themes.csproj` — core does not reference palettes.
 
 ## Projects
 
@@ -56,7 +56,7 @@ Views keep explicit styles. Color values inside those styles use `{DynamicResour
 | `Vestigium.Themes` | Contracts, `ThemeManager`, metrics |
 | `Vestigium.Themes.Controls` | Explicit styles bound to tokens |
 | Eight `Vestigium.Themes.*` palettes | XAML-only; identical keys, different values |
-| `Vestigium.Themes.Demo` | Tabbed control gallery + switcher |
+| `Vestigium.Themes.Pack` | Pack-only bag — produces the NuGet package |
 
 **StandardWPF** is a palette (keys still resolve). `ThemeManager.Unload()` is the escape hatch that returns stock WPF.
 
