@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <!--
-    Pack-only bag. Builds the ten product projects, then packs Vestigium.Themes.nuspec.
+    Pack-only bag. Builds the product projects, then packs Vestigium.Themes.nuspec.
     Restore name stays Vestigium.Themes.Pack so it does not collide with core.
   -->
   <PropertyGroup>
@@ -16,7 +16,7 @@
     <NuspecFile>Vestigium.Themes.nuspec</NuspecFile>
     <NuspecBasePath>$(MSBuildThisFileDirectory)..\..\</NuspecBasePath>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,5 +30,6 @@
     <ProjectReference Include="..\Vestigium.Themes.Monokai\Vestigium.Themes.Monokai.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\Vestigium.Themes.Sublime\Vestigium.Themes.Sublime.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\Vestigium.Themes.Dracula\Vestigium.Themes.Dracula.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Vestigium.Themes.Nord\Vestigium.Themes.Nord.csproj" PrivateAssets="all" />
   </ItemGroup>
 </Project>

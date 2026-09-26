@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Vestigium.Themes</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>Vestigium</authors>
     <owners>Vestigium</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -26,5 +26,6 @@
     <file src="src\Vestigium.Themes.Monokai\bin\Release\net10.0-windows\Vestigium.Themes.Monokai.dll" target="lib\net10.0-windows7.0\" />
     <file src="src\Vestigium.Themes.Sublime\bin\Release\net10.0-windows\Vestigium.Themes.Sublime.dll" target="lib\net10.0-windows7.0\" />
     <file src="src\Vestigium.Themes.Dracula\bin\Release\net10.0-windows\Vestigium.Themes.Dracula.dll" target="lib\net10.0-windows7.0\" />
+    <file src="src\Vestigium.Themes.Nord\bin\Release\net10.0-windows\Vestigium.Themes.Nord.dll" target="lib\net10.0-windows7.0\" />
   </files>
 </package>
