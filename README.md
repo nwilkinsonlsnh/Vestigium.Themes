@@ -3,7 +3,7 @@
 Modular WPF theming for the Vestigium suite. One control language, many palettes, runtime swap without rebuilding the host.
 
 **Target:** .NET 10 / WPF / Visual Studio 2026  
-**Package:** `Vestigium.Themes` 1.0.1 — one nupkg, eleven DLLs (core, catalog, nine palettes).  
+**Package:** `Vestigium.Themes` 1.0.2 — one nupkg, eleven DLLs (core, catalog, nine palettes).  
 **License:** MIT — [`LICENSE.md`](LICENSE.md)
 
 Verbose reference: [`_Documentation/DevelopersGuide_v1.0.md`](_Documentation/DevelopersGuide_v1.0.md)  
@@ -12,7 +12,7 @@ Requirements: [`_Documentation/Requirements_v1.0.md`](_Documentation/Requirement
 ## Consume
 
 ```text
-dotnet add package Vestigium.Themes --version 1.0.1
+dotnet add package Vestigium.Themes --version 1.0.2
 ```
 
 The package copies every palette DLL into the host output. You still **register** only the palettes the host will switch. NuGet does not call `Register` for you.
@@ -125,10 +125,10 @@ Register all nine if the host offers a full catalog. Register two if the product
 dotnet pack src\Vestigium.Themes.Pack\Vestigium.Themes.Pack.csproj -c Release -o artifacts\nuget
 ```
 
-Inspect `lib/net10.0-windows7.0/`. You want the eleven product DLLs and no `Vestigium.Themes.Pack.dll`.
+Inspect `lib/net10.0-windows7.0/`. You want the eleven product DLLs and no `Vestigium.Themes.Pack.dll`. The nupkg root should also contain `README.md` and `LICENSE.md`.
 
 ```powershell
-dotnet nuget push artifacts\nuget\Vestigium.Themes.1.0.1.nupkg `
+dotnet nuget push artifacts\nuget\Vestigium.Themes.1.0.2.nupkg `
   --api-key $env:VESTIGIUM_NUGET_APIKEY `
   --source https://api.nuget.org/v3/index.json
 ```
