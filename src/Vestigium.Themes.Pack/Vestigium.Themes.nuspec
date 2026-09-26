@@ -16,15 +16,15 @@
   </metadata>
   <files>
     <file src="README.md" target="README.md" />
-    <file src="src\Vestigium.Themes\bin\Release\net10.0-windows\Vestigium.Themes.dll" target="lib\net10.0-windows\" />
-    <file src="src\Vestigium.Themes.Controls\bin\Release\net10.0-windows\Vestigium.Themes.Controls.dll" target="lib\net10.0-windows\" />
-    <file src="src\Vestigium.Themes.LightBlue\bin\Release\net10.0-windows\Vestigium.Themes.LightBlue.dll" target="lib\net10.0-windows\" />
-    <file src="src\Vestigium.Themes.DarkMode\bin\Release\net10.0-windows\Vestigium.Themes.DarkMode.dll" target="lib\net10.0-windows\" />
-    <file src="src\Vestigium.Themes.Terminal\bin\Release\net10.0-windows\Vestigium.Themes.Terminal.dll" target="lib\net10.0-windows\" />
-    <file src="src\Vestigium.Themes.SolarizedDark\bin\Release\net10.0-windows\Vestigium.Themes.SolarizedDark.dll" target="lib\net10.0-windows\" />
-    <file src="src\Vestigium.Themes.StandardWPF\bin\Release\net10.0-windows\Vestigium.Themes.StandardWPF.dll" target="lib\net10.0-windows\" />
-    <file src="src\Vestigium.Themes.Monokai\bin\Release\net10.0-windows\Vestigium.Themes.Monokai.dll" target="lib\net10.0-windows\" />
-    <file src="src\Vestigium.Themes.Sublime\bin\Release\net10.0-windows\Vestigium.Themes.Sublime.dll" target="lib\net10.0-windows\" />
-    <file src="src\Vestigium.Themes.Dracula\bin\Release\net10.0-windows\Vestigium.Themes.Dracula.dll" target="lib\net10.0-windows\" />
+    <file src="src\Vestigium.Themes\bin\Release\net10.0-windows\Vestigium.Themes.dll" target="lib\net10.0-windows7.0\" />
+    <file src="src\Vestigium.Themes.Controls\bin\Release\net10.0-windows\Vestigium.Themes.Controls.dll" target="lib\net10.0-windows7.0\" />
+    <file src="src\Vestigium.Themes.LightBlue\bin\Release\net10.0-windows\Vestigium.Themes.LightBlue.dll" target="lib\net10.0-windows7.0\" />
+    <file src="src\Vestigium.Themes.DarkMode\bin\Release\net10.0-windows\Vestigium.Themes.DarkMode.dll" target="lib\net10.0-windows7.0\" />
+    <file src="src\Vestigium.Themes.Terminal\bin\Release\net10.0-windows\Vestigium.Themes.Terminal.dll" target="lib\net10.0-windows7.0\" />
+    <file src="src\Vestigium.Themes.SolarizedDark\bin\Release\net10.0-windows\Vestigium.Themes.SolarizedDark.dll" target="lib\net10.0-windows7.0\" />
+    <file src="src\Vestigium.Themes.StandardWPF\bin\Release\net10.0-windows\Vestigium.Themes.StandardWPF.dll" target="lib\net10.0-windows7.0\" />
+    <file src="src\Vestigium.Themes.Monokai\bin\Release\net10.0-windows\Vestigium.Themes.Monokai.dll" target="lib\net10.0-windows7.0\" />
+    <file src="src\Vestigium.Themes.Sublime\bin\Release\net10.0-windows\Vestigium.Themes.Sublime.dll" target="lib\net10.0-windows7.0\" />
+    <file src="src\Vestigium.Themes.Dracula\bin\Release\net10.0-windows\Vestigium.Themes.Dracula.dll" target="lib\net10.0-windows7.0\" />
   </files>
 </package>
