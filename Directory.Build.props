@@ -4,4 +4,9 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+  <!-- One physical file at the repo root. Link so Solution Explorer shows it under each project. -->
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)LICENSE.md" Link="LICENSE.md" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" Link="README.md" />
+  </ItemGroup>
 </Project>
