@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Vestigium.Themes</id>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <authors>Vestigium</authors>
     <owners>Vestigium</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
