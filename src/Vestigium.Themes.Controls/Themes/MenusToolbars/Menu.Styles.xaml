@@ -198,19 +198,20 @@
 
     <!-- ========================================== -->
     <!-- 3. MENU SEPARATOR                          -->
+    <!-- Stroke.Subtle matches Surface.Card in the dark palettes, so the line vanished. -->
     <!-- ========================================== -->
     <Style x:Key="Separator.Menu" TargetType="Separator">
-        <Setter Property="Background" Value="{DynamicResource Vestigium.Brushes.Text.Secondary}" />
         <Setter Property="Height" Value="1" />
-        <Setter Property="Margin" Value="8,4" />
+        <Setter Property="Margin" Value="8,6" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Separator">
                     <Border Height="1"
-                            Margin="8,4"
+                            Margin="8,6"
+                            HorizontalAlignment="Stretch"
                             SnapsToDevicePixels="True"
-                            Background="{DynamicResource Vestigium.Brushes.Text.Secondary}" />
+                            Background="#9AA8B8" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
