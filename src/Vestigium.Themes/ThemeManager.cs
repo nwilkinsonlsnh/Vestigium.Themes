@@ -31,6 +31,13 @@ public sealed class ThemeManager : IThemeManager
         _themes.Add(theme);
     }
 
+    /// <summary>Registers the nine shipped palettes. Does not run on package import.</summary>
+    public void RegisterSuiteV1()
+    {
+        foreach (var theme in ThemeDefinitions.SuiteV1)
+            Register(theme);
+    }
+
     public void Initialize(Application application, string? themeId = null)
     {
         ArgumentNullException.ThrowIfNull(application);
