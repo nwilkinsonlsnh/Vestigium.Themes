@@ -198,20 +198,26 @@
 
     <!-- ========================================== -->
     <!-- 3. MENU SEPARATOR                          -->
-    <!-- Stroke.Subtle matches Surface.Card in the dark palettes, so the line vanished. -->
+    <!-- Stroke.Subtle matches Surface.Card on the dark palettes.             -->
+    <!-- A 1px Height with SnapsToDevicePixels also rounds to zero on 150%+.  -->
+    <!-- The line is 1.5px, not snapped, sitting in an 11px row.               -->
     <!-- ========================================== -->
     <Style x:Key="Separator.Menu" TargetType="Separator">
-        <Setter Property="Height" Value="1" />
-        <Setter Property="Margin" Value="8,6" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Height" Value="11" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Separator">
-                    <Border Height="1"
-                            Margin="8,6"
-                            HorizontalAlignment="Stretch"
-                            SnapsToDevicePixels="True"
-                            Background="#9AA8B8" />
+                    <Border Height="11" HorizontalAlignment="Stretch" Background="Transparent">
+                        <Border Height="1.5"
+                                Margin="8,0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
+                                Background="#9AA8B8"
+                                UseLayoutRounding="True" />
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
