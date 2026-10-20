@@ -16,7 +16,8 @@
     <NuspecFile>Vestigium.Themes.nuspec</NuspecFile>
     <NuspecBasePath>$(MSBuildThisFileDirectory)..\..\</NuspecBasePath>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
-    <Version>1.0.6</Version>
+    <Version>1.1.0</Version>
+      <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,4 +33,5 @@
     <ProjectReference Include="..\Vestigium.Themes.Dracula\Vestigium.Themes.Dracula.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\Vestigium.Themes.Nord\Vestigium.Themes.Nord.csproj" PrivateAssets="all" />
   </ItemGroup>
+  <ItemGroup></ItemGroup>
 </Project>
