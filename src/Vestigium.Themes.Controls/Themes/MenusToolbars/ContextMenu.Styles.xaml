@@ -37,12 +37,7 @@
                         </Border.Effect>
                         <StackPanel IsItemsHost="True"
                                     KeyboardNavigation.DirectionalNavigation="Cycle"
-                                    Grid.IsSharedSizeScope="True">
-                            <StackPanel.Resources>
-                                <!-- Stroke.Subtle matches Surface.Card in the dark palettes. -->
-                                <Style TargetType="Separator" BasedOn="{StaticResource Separator.Menu}" />
-                            </StackPanel.Resources>
-                        </StackPanel>
+                                    Grid.IsSharedSizeScope="True" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
